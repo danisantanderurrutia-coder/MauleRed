@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+.theme-roble {
+  --color-topbar-bg: #11261d;       /* Roble Andino sombrío */
+  --color-radio-bg: #0c1f17;        /* Verde fluvial profundo */
+  --color-header-bg: #f5f7f4;       /* Papel prensa limpio cordillerano */
+  --color-nav-bg: #ffffff;
+  --color-primary: #1b4332;         /* Verde Roble Andino precordillera */
+  --color-primary-hover: #143527;
+  --color-secondary: #1c5274;       /* Azul Río Achibueno y Maule */
+  --color-secondary-hover: #153e58;
+  --color-accent: #c68b28;          /* Ocre Trigo Secano / Ferias */
+  --color-accent-bg: #f0f7f2;
+  --color-accent-border: #bfd6c6;
+  --color-accent-text: #1b4332;
+  --color-alert: #8c2d19;           /* Ladrillo colonial sobrio */
+  --color-bg: #eef3ed;              /* Gris verdoso papel prensa cordillera */
+  --color-surface: #ffffff;
+  --color-surface-soft: #e3ede4;
+  --color-border: #cdd9cf;
+  --color-text-main: #0f1c15;
+  --color-text-muted: #495a50;
+}
+
+.theme-greda {
+  --color-topbar-bg: #3d2119;       /* Adobe y greda quemada */
+  --color-radio-bg: #27130e;        /* Tiesto negro de Pilén */
+  --color-header-bg: #f5eedf;       /* Paja de trigo y papel lino artesanal */
+  --color-nav-bg: #fbf8f2;
+  --color-primary: #7a3a29;         /* Greda cocida mate de Pilén */
+  --color-primary-hover: #632d1f;
+  --color-secondary: #3e5239;       /* Verde Olivo y Viñedos Cauquenes */
+  --color-secondary-hover: #2d3d2a;
+  --color-accent: #b37d14;          /* Dorado Mosto Campesino */
+  --color-accent-bg: #faf3e6;
+  --color-accent-border: #dfcfaf;
+  --color-accent-text: #704707;
+  --color-alert: #7d2222;           /* Granate seco */
+  --color-bg: #e8d7be;              /* Tierra greda tostada clara y paja */
+  --color-surface: #fdfbf7;
+  --color-surface-soft: #dfceb5;
+  --color-border: #cfbc9e;
+  --color-text-main: #241913;
+  --color-text-muted: #5e4d41;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* Modo Ahorro de Datos 3G */
+.data-saver-mode img {
+  filter: contrast(1.05) saturate(0.85);
+}
+
+.data-saver-mode .heavy-media {
+  display: none !important;
+}
+
+/* Animación de barras de audio radial */
+@keyframes audio-wave {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+
+.wave-bar-1 { animation: audio-wave 0.8s ease-in-out infinite 0.1s; }
+.wave-bar-2 { animation: audio-wave 1.1s ease-in-out infinite 0.3s; }
+.wave-bar-3 { animation: audio-wave 0.7s ease-in-out infinite 0.2s; }
+.wave-bar-4 { animation: audio-wave 1.3s ease-in-out infinite 0.4s; }
+.wave-bar-5 { animation: audio-wave 0.9s ease-in-out infinite 0.15s; }
+
+/* Scrollbars discretos para tablas y paneles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(27, 67, 50, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(27, 67, 50, 0.6);
+}
