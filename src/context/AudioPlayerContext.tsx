@@ -124,6 +124,41 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const radioAudioRef = useRef<HTMLAudioElement | null>(null);
   const synthAudioRef = useRef<{ ctx: AudioContext; osc: OscillatorNode; gain: GainNode } | null>(null);
 
+  const startWebAudioRadio = React.useCallback(() => {
+    try {
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      // Tono armónico cálido suave (onda triangular 220Hz La campesino)
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(220, ctx.currentTime);
+      gain.gain.setValueAtTime(0.02 * (isMuted ? 0 : radioVolume), ctx.currentTime);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+
+      synthAudioRef.current = { ctx, osc, gain };
+    } catch {
+      // Autoplay policy fallback
+    }
+  }, [isMuted, radioVolume]);
+
+  const stopWebAudioRadio = React.useCallback(() => {
+    if (synthAudioRef.current) {
+      try {
+        synthAudioRef.current.osc.stop();
+        synthAudioRef.current.ctx.close();
+      } catch {
+        // cleanup ignore
+      }
+      synthAudioRef.current = null;
+    }
+  }, []);
+
   useEffect(() => {
     // Instancia para cápsulas
     audioRef.current = new Audio();
@@ -152,7 +187,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
       }
       stopWebAudioRadio();
     };
-  }, []);
+  }, [startWebAudioRadio, stopWebAudioRadio]);
 
   const selectStation = (stationId: string) => {
     setSelectedStationId(stationId);
@@ -194,41 +229,6 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
       } else {
         startWebAudioRadio();
       }
-    }
-  };
-
-  const startWebAudioRadio = () => {
-    try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      // Tono armónico cálido suave (onda triangular 220Hz La campesino)
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(220, ctx.currentTime);
-      gain.gain.setValueAtTime(0.02 * (isMuted ? 0 : radioVolume), ctx.currentTime);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-
-      synthAudioRef.current = { ctx, osc, gain };
-    } catch {
-      // Autoplay policy fallback
-    }
-  };
-
-  const stopWebAudioRadio = () => {
-    if (synthAudioRef.current) {
-      try {
-        synthAudioRef.current.osc.stop();
-        synthAudioRef.current.ctx.close();
-      } catch {
-        // cleanup ignore
-      }
-      synthAudioRef.current = null;
     }
   };
 
