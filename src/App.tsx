@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState } from 'react';
 import { AppDataProvider, useAppData } from './context/AppDataContext';
 import { AudioPlayerProvider } from './context/AudioPlayerContext';
 import { RadioPlayerBar } from './components/frontoffice/RadioPlayerBar';
@@ -21,9 +21,8 @@ import { ThemeSwitcherFloating } from './components/frontoffice/ThemeSwitcherFlo
 import { Footer } from './components/frontoffice/Footer';
 import { SectionType, Article } from './types';
 
-// Code Splitting Dinámico para el Administrador Santuario y Gatekeeper
-const AdminLayout = lazy(() => import('./components/admin/AdminLayout').then(m => ({ default: m.AdminLayout })));
-const GatekeeperLogin = lazy(() => import('./components/admin/GatekeeperLogin').then(m => ({ default: m.GatekeeperLogin })));
+import { AdminLayout } from './components/admin/AdminLayout';
+import { GatekeeperLogin } from './components/admin/GatekeeperLogin';
 
 const THEME_VARIABLES: Record<'opcionA' | 'opcionC', Record<string, string>> = {
   opcionA: {
@@ -112,15 +111,7 @@ const MainContent: React.FC = () => {
 
   // Si estamos en la vista del Administrador Santuario
   if (viewMode === 'admin') {
-    return (
-      <Suspense fallback={
-        <div className="min-h-screen bg-[#0e1115] text-amber-200 flex items-center justify-center font-bold text-sm">
-          Cargando Santuario de Redacción...
-        </div>
-      }>
-        <AdminLayout onBackToFrontoffice={() => setViewMode('frontoffice')} />
-      </Suspense>
-    );
+    return <AdminLayout onBackToFrontoffice={() => setViewMode('frontoffice')} />;
   }
 
   // Vista Pública (Frontoffice)
@@ -222,15 +213,13 @@ const MainContent: React.FC = () => {
 
       {/* Modal de Autenticación Gatekeeper para entrar al Santuario con Lazy Loading */}
       {showGatekeeper && (
-        <Suspense fallback={null}>
-          <GatekeeperLogin
-            onSuccess={() => {
-              setShowGatekeeper(false);
-              setViewMode('admin');
-            }}
-            onCancel={() => setShowGatekeeper(false)}
-          />
-        </Suspense>
+        <GatekeeperLogin
+          onSuccess={() => {
+            setShowGatekeeper(false);
+            setViewMode('admin');
+          }}
+          onCancel={() => setShowGatekeeper(false)}
+        />
       )}
 
     </div>
