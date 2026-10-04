@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { AppDataProvider, useAppData } from './context/AppDataContext';
 import { AudioPlayerProvider } from './context/AudioPlayerContext';
+import { RadioPlayerBar } from './components/frontoffice/RadioPlayerBar';
 import { Header } from './components/frontoffice/Header';
 import { EmergencyTicker } from './components/frontoffice/EmergencyTicker';
 import { TerritoryMap } from './components/frontoffice/TerritoryMap';
@@ -18,9 +19,11 @@ import { ArticleDetailModal } from './components/frontoffice/ArticleDetailModal'
 import { WhatsAppFloatingBtn } from './components/frontoffice/WhatsAppFloatingBtn';
 import { ThemeSwitcherFloating } from './components/frontoffice/ThemeSwitcherFloating';
 import { Footer } from './components/frontoffice/Footer';
-import { AdminLayout } from './components/admin/AdminLayout';
-import { GatekeeperLogin } from './components/admin/GatekeeperLogin';
 import { SectionType, Article } from './types';
+
+// Code Splitting Dinámico para el Administrador Santuario y Gatekeeper
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout').then(m => ({ default: m.AdminLayout })));
+const GatekeeperLogin = lazy(() => import('./components/admin/GatekeeperLogin').then(m => ({ default: m.GatekeeperLogin })));
 
 const THEME_VARIABLES: Record<'opcionA' | 'opcionC', Record<string, string>> = {
   opcionA: {
@@ -110,7 +113,13 @@ const MainContent: React.FC = () => {
   // Si estamos en la vista del Administrador Santuario
   if (viewMode === 'admin') {
     return (
-      <AdminLayout onBackToFrontoffice={() => setViewMode('frontoffice')} />
+      <Suspense fallback={
+        <div className="min-h-screen bg-[#0e1115] text-amber-200 flex items-center justify-center font-bold text-sm">
+          Cargando Santuario de Redacción...
+        </div>
+      }>
+        <AdminLayout onBackToFrontoffice={() => setViewMode('frontoffice')} />
+      </Suspense>
     );
   }
 
@@ -123,14 +132,17 @@ const MainContent: React.FC = () => {
       } bg-theme-bg text-theme-textMain ${isDataSaverActive ? 'data-saver-mode' : ''}`}
     >
       
-      {/* Cabecera, Clima Rápido y Radio en Vivo Permanente */}
+      {/* 1. Reproductor Radial Permanente - Sticky Top-0 a Nivel de Pantalla */}
+      <RadioPlayerBar />
+
+      {/* 2. Cabecera, Clima Rápido y Navegación */}
       <Header
         activeSection={activeSection}
         setActiveSection={setActiveSection}
         onOpenAdmin={handleOpenAdmin}
       />
 
-      {/* Avisador de Cortes APR, Luz CGE y Emergencias */}
+      {/* 3. Avisador de Cortes APR, Luz CGE y Emergencias */}
       <EmergencyTicker />
 
       {/* Contenedor Principal de Contenido con Anclaje para Navegación Inmediata */}
@@ -188,6 +200,9 @@ const MainContent: React.FC = () => {
 
       </main>
 
+      {/* Selector Flotante de Estética Territorial (Roble vs Greda) */}
+      <ThemeSwitcherFloating />
+
       {/* Botón Flotante Permanente de WhatsApp */}
       <WhatsAppFloatingBtn />
 
@@ -205,15 +220,17 @@ const MainContent: React.FC = () => {
         />
       )}
 
-      {/* Modal de Autenticación Gatekeeper para entrar al Santuario */}
+      {/* Modal de Autenticación Gatekeeper para entrar al Santuario con Lazy Loading */}
       {showGatekeeper && (
-        <GatekeeperLogin
-          onSuccess={() => {
-            setShowGatekeeper(false);
-            setViewMode('admin');
-          }}
-          onCancel={() => setShowGatekeeper(false)}
-        />
+        <Suspense fallback={null}>
+          <GatekeeperLogin
+            onSuccess={() => {
+              setShowGatekeeper(false);
+              setViewMode('admin');
+            }}
+            onCancel={() => setShowGatekeeper(false)}
+          />
+        </Suspense>
       )}
 
     </div>

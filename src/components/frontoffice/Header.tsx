@@ -133,10 +133,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* 2. Reproductor Radial Permanente */}
-      <RadioPlayerBar />
-
-      {/* 3. Cabecera Principal y Marca Comunitaria */}
+      {/* 2. Cabecera Principal y Marca Comunitaria */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           
@@ -206,8 +203,8 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* 4. Barra de Navegación Reactiva por Secciones - Alto Contraste Garantizado */}
-      <div className={`border-t sticky top-[60px] z-30 shadow-md transition-colors duration-300 ${
+      {/* 3. Barra de Navegación Reactiva por Secciones - Alto Contraste Garantizado */}
+      <div className={`border-t md:sticky md:top-[50px] z-30 shadow-md transition-colors duration-300 ${
         themeStyle === 'opcionC' 
           ? 'bg-[#fdfaf4] border-[#d8c7b0]' 
           : 'bg-white border-[#c2d6c7]'

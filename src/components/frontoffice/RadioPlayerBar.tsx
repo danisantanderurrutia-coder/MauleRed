@@ -50,14 +50,14 @@ export const RadioPlayerBar: React.FC = () => {
           : 'bg-[#0a1e16] text-emerald-50 border-[#1b382a]'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-3 min-h-[50px]">
         
         {/* Lado izquierdo: Estación & Identidad Radial & Selector de Radios */}
-        <div className="flex items-center gap-3 min-w-0">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <div className="relative flex-shrink-0">
             <button
               onClick={toggleRadio}
-              className={`w-10 h-10 rounded-full flex items-center justify-center transition-transform active:scale-95 shadow-md cursor-pointer ${
+              className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-transform active:scale-95 shadow-md cursor-pointer ${
                 isRadioPlaying 
                   ? 'bg-[#10b981] text-white ring-2 ring-emerald-400/70' 
                   : isOpC 
@@ -67,7 +67,7 @@ export const RadioPlayerBar: React.FC = () => {
               title={isRadioPlaying ? 'Pausar radio comunitaria' : 'Sintonizar radio en vivo'}
               aria-label={isRadioPlaying ? 'Pausar radio' : 'Reproducir radio'}
             >
-              {isRadioPlaying ? <Pause size={18} className="fill-current" /> : <Play size={18} className="fill-current ml-0.5" />}
+              {isRadioPlaying ? <Pause size={17} className="fill-current" /> : <Play size={17} className="fill-current ml-0.5" />}
             </button>
             {isRadioPlaying && (
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
@@ -78,21 +78,21 @@ export const RadioPlayerBar: React.FC = () => {
           </div>
 
           <div className="min-w-0">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className={`inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded text-white border shadow-2xs ${
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className={`inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-1.5 sm:px-2 py-0.5 rounded text-white border shadow-2xs flex-shrink-0 ${
                 isOpC ? 'bg-[#7a3a29] border-amber-500/30' : 'bg-[#1b4332] border-emerald-500/30'
               }`}>
-                <Radio size={11} className="animate-pulse" /> EN VIVO
+                <Radio size={10} className="animate-pulse" /> EN VIVO
               </span>
 
               {/* Botón Selector de Estación */}
               <button
                 onClick={() => setStationModalOpen(true)}
-                className="text-xs font-black tracking-wide text-amber-300 hover:text-amber-200 truncate flex items-center gap-1 bg-black/40 px-2 py-0.5 rounded-md border border-white/10 hover:border-amber-400/50 transition-colors cursor-pointer"
+                className="text-[11px] sm:text-xs font-black tracking-wide text-amber-300 hover:text-amber-200 truncate flex items-center gap-1 bg-black/40 px-2 py-0.5 rounded-md border border-white/10 hover:border-amber-400/50 transition-colors cursor-pointer max-w-[140px] sm:max-w-[220px]"
                 title="Cambiar sintonía radial o elegir Radio Cristalina de Panimávida"
               >
                 <span className="truncate">{currentStation}</span>
-                <ChevronDown size={13} className="text-amber-400 flex-shrink-0" />
+                <ChevronDown size={12} className="text-amber-400 flex-shrink-0" />
               </button>
 
               {/* Enlace Directo a Spotify Podcast */}
@@ -100,11 +100,11 @@ export const RadioPlayerBar: React.FC = () => {
                 href={spotifyPodcastUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[11px] font-black bg-[#1DB954] hover:bg-[#1ed760] text-black px-2.5 py-0.5 rounded-full shadow-sm transition-transform active:scale-95"
+                className="hidden sm:inline-flex items-center gap-1 text-[11px] font-black bg-[#1DB954] hover:bg-[#1ed760] text-black px-2.5 py-0.5 rounded-full shadow-sm transition-transform active:scale-95 flex-shrink-0"
                 title="Escuchar podcast 'El Maule Sur también existe' en Spotify"
               >
                 <Headphones size={11} />
-                <span>Spotify Podcast</span>
+                <span>Podcast</span>
                 <ExternalLink size={10} />
               </a>
             </div>
