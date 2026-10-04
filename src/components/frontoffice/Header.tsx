@@ -18,7 +18,8 @@ import {
   X, 
   BookOpen, 
   Palette, 
-  ChevronDown 
+  ChevronDown,
+  Share2 
 } from 'lucide-react';
 import { SectionType } from '../../types';
 
