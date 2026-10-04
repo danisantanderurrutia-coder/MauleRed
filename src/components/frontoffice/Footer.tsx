@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin, onNavigateSection }
                   alt="Emblema Popular Maule Sur" 
                   className="w-full h-full object-contain filter drop-shadow-md"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/images/logo_chucao_andes.png';
+                    (e.target as HTMLImageElement).src = './images/logo_chucao_andes.png';
                   }}
                 />
               </div>

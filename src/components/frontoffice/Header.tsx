@@ -149,7 +149,7 @@ export const Header: React.FC<HeaderProps> = ({
                 alt="Logo Oficial Red de Noticias y Comunicación Popular del Maule Sur" 
                 className="w-full h-full object-contain filter drop-shadow-lg transition-transform duration-300 group-hover:rotate-1"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/images/logo_chucao_andes.png';
+                  (e.target as HTMLImageElement).src = './images/logo_chucao_andes.png';
                 }}
               />
             </div>

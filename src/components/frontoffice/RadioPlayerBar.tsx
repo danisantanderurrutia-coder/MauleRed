@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 export const RadioPlayerBar: React.FC = () => {
-  const { themeStyle } = useAppData();
+  const { themeStyle, selectedLogoSrc } = useAppData();
   const [stationModalOpen, setStationModalOpen] = useState(false);
 
   const {
@@ -54,6 +54,18 @@ export const RadioPlayerBar: React.FC = () => {
         
         {/* Lado izquierdo: Estación & Identidad Radial & Selector de Radios */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          {/* Emblema Oficial Maule Sur (Ave Chucao & Andes) */}
+          <div className="w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0 rounded-full overflow-hidden bg-black/30 border border-white/20 p-0.5 shadow-sm" title="Red de Noticias del Maule Sur">
+            <img 
+              src={selectedLogoSrc} 
+              alt="Emblema Maule Sur" 
+              className="w-full h-full object-contain filter drop-shadow-xs"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = './images/logo_chucao_andes.png';
+              }}
+            />
+          </div>
+
           <div className="relative flex-shrink-0">
             <button
               onClick={toggleRadio}

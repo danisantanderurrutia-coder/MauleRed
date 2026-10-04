@@ -264,10 +264,10 @@ export const AppDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const selectedLogoSrc = (selectedLogo === 'v2_20' || selectedLogo === 'v2_23' || selectedLogo === '20')
-    ? '/images/logo_chucao_andes.png'
+    ? './images/logo_chucao_andes.png'
     : selectedLogo.startsWith('v2_')
-      ? `/images/logo_v2_${selectedLogo.replace('v2_', '')}_clean.png`
-      : `/images/logo_opcion_${selectedLogo}_clean.png`;
+      ? `./images/logo_v2_${selectedLogo.replace('v2_', '')}_clean.png`
+      : `./images/logo_opcion_${selectedLogo}_clean.png`;
 
   const setThemeStyle = (theme: 'opcionA' | 'opcionC') => {
     setThemeStyleState(theme);
