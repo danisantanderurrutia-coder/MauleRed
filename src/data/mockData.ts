@@ -43,7 +43,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-1',
     name: 'Don Juan Sepúlveda',
-    avatar: 'https://images.unsplash.com/photo-1544717302-de2939b7ef71?auto=format&fit=crop&w=400&q=80',
+    avatar: '/images/corr_juan.jpg',
     role: 'Corresponsal Agrícola y Faena Campesina',
     comuna: 'Longaví',
     cuenca: 'Río Achibueno',
@@ -57,7 +57,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-2',
     name: 'Rosa Albornoz',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    avatar: '/images/corr_rosa.jpg',
     role: 'Corresponsal Comunitaria y Defensora de APR',
     comuna: 'Linares',
     cuenca: 'Río Achibueno',
@@ -71,7 +71,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-3',
     name: 'Margarita Baeza',
-    avatar: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=400&q=80',
+    avatar: '/images/corr_margarita.jpg',
     role: 'Cronista de Saberes y Cultora en Crin',
     comuna: 'Colbún',
     cuenca: 'Río Maule',
@@ -85,7 +85,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-4',
     name: 'Mateo Valenzuela',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    avatar: '/images/corr_mateo.jpg',
     role: 'Corresponsal del Secano y Viñas Patrimoniales',
     comuna: 'Cauquenes',
     cuenca: 'Río Loncomilla',
@@ -99,7 +99,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-5',
     name: 'Esteban Retamal',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+    avatar: '/images/corr_esteban.jpg',
     role: 'Reportero de Servicios Básicos y Red Eléctrica',
     comuna: 'Retiro',
     cuenca: 'Río Perquilauquén',
@@ -113,7 +113,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-6',
     name: 'Marcela Fuentes',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
+    avatar: '/images/corr_marcela.jpg',
     role: 'Corresponsal de Salud Rural y Cuidados',
     comuna: 'Panimávida',
     cuenca: 'Río Maule',
@@ -248,9 +248,9 @@ export const INITIAL_ARTICLES: Article[] = [
     comuna: 'Yerbas Buenas',
     cuenca: 'Río Maule',
     status: 'publicado',
-    coverImage: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80',
+    coverImage: '/images/noticia_semillas.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80'
+      '/images/noticia_semillas.jpg'
     ],
     hasAudioCapsule: true,
     audioDuration: '01:25',
@@ -694,7 +694,7 @@ export const INITIAL_MODERATION_ITEMS: ModerationItem[] = [
     content: 'Hola compas de la radio, les mando este audio y foto. Desde ayer están con motosierras en la quebrada del estero botando bosque nativo. El agua de la vertiente bajó turbia y con aserrín. Por favor difundan para que vaya Conaf.',
     senderName: 'Marta Morales (Vecina de Rabones)',
     senderPhone: '+56 9 7712 9081',
-    mediaUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80',
+    mediaUrl: '/images/moderacion_default.jpg',
     audioUrl: 'https://actions.google.com/sounds/v1/household/clock_ticking.ogg',
     comuna: 'Parral',
     timestamp: 'Hace 35 min',

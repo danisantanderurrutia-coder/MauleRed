@@ -60,8 +60,8 @@ export const ArticleEditorForm: React.FC<ArticleEditorFormProps> = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Gestor Multimedia (Fotos y Galería)
-  const [coverImage, setCoverImage] = useState(initialArticle?.coverImage || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80');
-  const [gallery, setGallery] = useState<string[]>(initialArticle?.gallery || [initialArticle?.coverImage || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80']);
+  const [coverImage, setCoverImage] = useState(initialArticle?.coverImage || '/images/campo_alfalfa.jpg');
+  const [gallery, setGallery] = useState<string[]>(initialArticle?.gallery || [initialArticle?.coverImage || '/images/campo_alfalfa.jpg']);
   const [newImageUrl, setNewImageUrl] = useState('');
 
   // Subida de imagen mediante FileReader base64
@@ -144,7 +144,7 @@ export const ArticleEditorForm: React.FC<ArticleEditorFormProps> = ({
       comuna,
       cuenca,
       status,
-      coverImage: coverImage || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80',
+      coverImage: coverImage || '/images/campo_alfalfa.jpg',
       gallery: gallery.length > 0 ? gallery : [coverImage],
       hasAudioCapsule,
       audioUrl: hasAudioCapsule ? audioUrl : undefined,

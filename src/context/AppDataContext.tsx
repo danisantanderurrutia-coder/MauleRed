@@ -443,7 +443,7 @@ export const AppDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
         comuna: finalItem.comuna,
         cuenca: 'Río Maule',
         status: 'publicado',
-        coverImage: finalItem.mediaUrl || 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80',
+        coverImage: finalItem.mediaUrl || '/images/moderacion_default.jpg',
         gallery: finalItem.mediaUrl ? [finalItem.mediaUrl] : [],
         hasAudioCapsule: Boolean(finalItem.audioUrl),
         audioUrl: finalItem.audioUrl,
