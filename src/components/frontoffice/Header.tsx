@@ -1,28 +1,24 @@
 import React from 'react';
 import { useAppData } from '../../context/AppDataContext';
-import { RadioPlayerBar } from './RadioPlayerBar';
 import { 
   CloudSun, 
   Wifi, 
   WifiOff, 
   Lock, 
   Radio, 
-  Flame, 
-  Droplet,
   HeartHandshake, 
   Calendar, 
   ClipboardList, 
-  AlertTriangle,
-  Newspaper,
-  Globe,
-  Users,
-  Map,
-  Menu,
-  X,
-  BookOpen,
-  Palette,
-  ChevronDown,
-  Share2
+  AlertTriangle, 
+  Newspaper, 
+  Globe, 
+  Users, 
+  Map, 
+  Menu, 
+  X, 
+  BookOpen, 
+  Palette, 
+  ChevronDown 
 } from 'lucide-react';
 import { SectionType } from '../../types';
 

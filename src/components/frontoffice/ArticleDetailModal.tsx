@@ -209,6 +209,9 @@ export const ArticleDetailModal: React.FC<ArticleDetailModalProps> = ({ article,
               <img
                 src={article.coverImage}
                 alt={article.title}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = './images/campo_alfalfa.jpg';
+                }}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -329,6 +332,9 @@ export const ArticleDetailModal: React.FC<ArticleDetailModalProps> = ({ article,
                     key={i}
                     src={imgUrl}
                     alt={`Foto ${i + 1}`}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = './images/campo_alfalfa.jpg';
+                    }}
                     className="h-28 w-full object-cover rounded-xl border border-gray-200"
                   />
                 ))}

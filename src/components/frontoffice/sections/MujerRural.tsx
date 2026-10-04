@@ -61,6 +61,9 @@ export const MujerRural: React.FC<MujerRuralProps> = ({ onSelectArticle }) => {
                   <img
                     src={art.coverImage}
                     alt={art.title}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = './images/artesania_manos.jpg';
+                    }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />

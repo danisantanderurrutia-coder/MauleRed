@@ -115,6 +115,9 @@ export const AlertaMaule: React.FC<AlertaMauleProps> = ({ onSelectArticle }) => 
                       <img
                         src={art.coverImage}
                         alt={art.title}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = './images/apr_vara_gruesa.jpg';
+                        }}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />

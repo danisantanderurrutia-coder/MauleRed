@@ -32,9 +32,27 @@ import {
   INITIAL_CORRESPONDENTS
 } from '../data/mockData';
 
-const STORAGE_KEY = 'MAULE_SUR_PLATFORM_V4';
+const STORAGE_KEY = 'MAULE_SUR_PLATFORM_V5';
 const AUTH_STORAGE_KEY = 'MAULE_SUR_AUTH_USER';
 const DATA_SAVER_KEY = 'MAULE_SUR_DATA_SAVER_3G';
+
+// Helper to normalize image paths for both relative base, root domain, and GitHub Pages
+export const getCleanImageUrl = (url: string | undefined, fallback = '/images/campo_alfalfa.jpg'): string => {
+  if (!url) return fallback;
+  // If user has old unsplash URLs cached in localStorage, replace with local assets
+  if (url.includes('unsplash.com')) {
+    if (url.includes('1544717302') || url.includes('sepulveda')) return '/images/corr_juan.jpg';
+    if (url.includes('1573496359') || url.includes('albornoz')) return '/images/corr_rosa.jpg';
+    if (url.includes('1567532939') || url.includes('baeza')) return '/images/corr_margarita.jpg';
+    if (url.includes('1507003211') || url.includes('mateo')) return '/images/corr_mateo.jpg';
+    if (url.includes('1500648767') || url.includes('esteban')) return '/images/corr_esteban.jpg';
+    if (url.includes('1544005313') || url.includes('marcela')) return '/images/corr_marcela.jpg';
+    if (url.includes('1585320806')) return '/images/noticia_semillas.jpg';
+    if (url.includes('1542601906')) return '/images/moderacion_default.jpg';
+    return fallback;
+  }
+  return url;
+};
 
 interface AppDataContextType {
   // Datos
@@ -118,7 +136,12 @@ export const AppDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [articles, setArticles] = useState<Article[]>(() => {
     try {
       const saved = localStorage.getItem(`${STORAGE_KEY}_ARTICLES`);
-      return saved ? JSON.parse(saved) : INITIAL_ARTICLES;
+      const list: Article[] = saved ? JSON.parse(saved) : INITIAL_ARTICLES;
+      return list.map(a => ({
+        ...a,
+        coverImage: getCleanImageUrl(a.coverImage),
+        gallery: a.gallery ? a.gallery.map(g => getCleanImageUrl(g)) : []
+      }));
     } catch {
       return INITIAL_ARTICLES;
     }

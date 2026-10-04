@@ -19,29 +19,31 @@ export const ThemeSwitcherFloating: React.FC = () => {
       <button
         type="button"
         onClick={() => setThemeStyle('opcionA')}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-black transition-all cursor-pointer ${
+        className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl font-black transition-all cursor-pointer ${
           themeStyle === 'opcionA'
             ? 'bg-[#1b4332] text-white ring-2 ring-[#c68b28] shadow-lg scale-105'
             : 'bg-white/10 text-gray-200 hover:bg-white/20'
         }`}
+        title="Estética Roble Andino y Río Achibueno"
       >
-        <span className="w-2.5 h-2.5 rounded-full bg-[#34d399] ring-1 ring-[#c68b28]"></span>
-        <span>🌿 Opción A: Roble & Río</span>
-        {themeStyle === 'opcionA' && <Check size={13} className="text-[#c68b28] stroke-[3]" />}
+        <span className="w-2.5 h-2.5 rounded-full bg-[#34d399] ring-1 ring-[#c68b28] flex-shrink-0"></span>
+        <span className="truncate">🌿 <span className="hidden sm:inline">Opción A: </span>Roble</span>
+        {themeStyle === 'opcionA' && <Check size={13} className="text-[#c68b28] stroke-[3] flex-shrink-0" />}
       </button>
 
       <button
         type="button"
         onClick={() => setThemeStyle('opcionC')}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-black transition-all cursor-pointer ${
+        className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl font-black transition-all cursor-pointer ${
           themeStyle === 'opcionC'
             ? 'bg-[#7a3a29] text-[#fbf8f2] ring-2 ring-[#b37d14] shadow-lg scale-105'
             : 'bg-white/10 text-gray-200 hover:bg-white/20'
         }`}
+        title="Estética Greda de Pilén y Lira Popular"
       >
-        <span className="w-2.5 h-2.5 rounded-full bg-[#f97316] ring-1 ring-[#b37d14]"></span>
-        <span>🏺 Opción C: Greda & Lira</span>
-        {themeStyle === 'opcionC' && <Check size={13} className="text-amber-300 stroke-[3]" />}
+        <span className="w-2.5 h-2.5 rounded-full bg-[#f97316] ring-1 ring-[#b37d14] flex-shrink-0"></span>
+        <span className="truncate">🏺 <span className="hidden sm:inline">Opción C: </span>Greda</span>
+        {themeStyle === 'opcionC' && <Check size={13} className="text-amber-300 stroke-[3] flex-shrink-0" />}
       </button>
     </aside>
   );

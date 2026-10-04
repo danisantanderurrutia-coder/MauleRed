@@ -110,6 +110,9 @@ export const Corresponsales: React.FC<CorresponsalesProps> = ({ onSelectArticle 
                   <img
                     src={corr.avatar}
                     alt={corr.name}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = './images/corr_juan.jpg';
+                    }}
                     className="w-16 h-16 rounded-2xl object-cover border-2 border-gray-300 shadow-sm flex-shrink-0"
                   />
                   <div>

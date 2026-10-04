@@ -135,6 +135,9 @@ export const PortadaNoticias: React.FC<PortadaNoticiasProps> = ({
                   <img
                     src={featuredArticle.coverImage}
                     alt={featuredArticle.title}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = './images/campo_alfalfa.jpg';
+                    }}
                     className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 ease-out brightness-[0.92] group-hover/img:brightness-100"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20 pointer-events-none"></div>
@@ -357,6 +360,9 @@ export const PortadaNoticias: React.FC<PortadaNoticiasProps> = ({
                     <img
                       src={art.coverImage}
                       alt={art.title}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = './images/campo_alfalfa.jpg';
+                      }}
                       className="w-full h-full object-cover group-hover/cardimg:scale-105 transition-transform duration-500 brightness-95 group-hover/cardimg:brightness-100"
                       loading="lazy"
                     />
