@@ -64,27 +64,35 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
   };
 
   return (
-    <div className="min-h-screen bg-[#0e1115] text-gray-200 font-sans flex flex-col">
+    <div 
+      className="min-h-screen text-slate-800 font-sans flex flex-col relative"
+      style={{
+        backgroundImage: `linear-gradient(to bottom, rgba(248, 250, 252, 0.88), rgba(241, 245, 249, 0.94)), url('./images/maule_campo_cielo.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       
-      {/* Barra de Cabecera Superior del Santuario */}
-      <header className="bg-[#14171d] border-b border-gray-800 sticky top-0 z-40 shadow-xl">
+      {/* Barra de Cabecera Superior del Panel de Administrador */}
+      <header className="bg-white/90 backdrop-blur-md border-b border-emerald-100 sticky top-0 z-40 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           
           {/* Identidad del Panel de Administrador */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md">
+            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-600/20">
               <Lock size={18} className="text-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-white font-extrabold text-sm sm:text-base font-serif">
+                <span className="text-slate-900 font-extrabold text-sm sm:text-base font-serif">
                   Panel de Administrador
                 </span>
-                <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-black uppercase px-2 py-0.5 rounded border border-emerald-500/30">
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase px-2 py-0.5 rounded border border-emerald-200">
                   Maule Sur
                 </span>
               </div>
-              <p className="text-[11px] text-gray-400">
+              <p className="text-[11px] text-slate-500 font-medium">
                 Gestión Territorial • Moderación Comunitaria
               </p>
             </div>
@@ -92,30 +100,30 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
 
           {/* Usuario Activo y Acciones de Salida */}
           <div className="flex items-center gap-3">
-            {/* Botón oculto de Administrador: Activar/Desactivar Paleta de Emergencia */}
+            {/* Botón Administrador: Activar/Desactivar Paleta de Emergencia */}
             <button
               onClick={toggleEmergencyTheme}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black transition-all border shadow-sm cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black transition-all border shadow-xs cursor-pointer ${
                 isEmergencyThemeActive
                   ? 'bg-amber-600 text-white border-amber-400 ring-2 ring-amber-300 animate-pulse'
-                  : 'bg-gray-800/90 text-amber-300 border-amber-500/30 hover:bg-amber-950/40'
+                  : 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100'
               }`}
               title="Activar/Desactivar Paleta de Emergencia Territorial (Opción C: Greda & Lira con Alerta Pública)"
             >
-              <AlertTriangle size={14} className={isEmergencyThemeActive ? 'text-white' : 'text-amber-400'} />
+              <AlertTriangle size={14} className={isEmergencyThemeActive ? 'text-white' : 'text-amber-600'} />
               <span className="hidden md:inline">
                 {isEmergencyThemeActive ? '🚨 Emergencia ACTIVA (Greda)' : '⚠️ Activar Paleta Emergencia'}
               </span>
             </button>
 
             {currentUser && (
-              <div className="hidden sm:flex items-center gap-2 bg-[#1b2026] px-3 py-1.5 rounded-xl border border-gray-700 text-xs">
-                <div className="w-6 h-6 rounded-full bg-[#e4a834] text-[#14171a] font-black flex items-center justify-center text-[10px]">
+              <div className="hidden sm:flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200 text-xs">
+                <div className="w-6 h-6 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center text-[10px]">
                   {currentUser.name.charAt(0)}
                 </div>
                 <div>
-                  <span className="font-bold text-white block leading-none">{currentUser.name}</span>
-                  <span className="text-[10px] font-semibold text-amber-400 uppercase leading-none">
+                  <span className="font-bold text-slate-800 block leading-none">{currentUser.name}</span>
+                  <span className="text-[10px] font-semibold text-emerald-700 uppercase leading-none">
                     Rol: {currentUser.role}
                   </span>
                 </div>
@@ -124,7 +132,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
 
             <button
               onClick={() => setShowPitchModal(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white text-xs font-black transition-all border border-emerald-400/40 shadow-sm cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white text-xs font-black transition-all shadow-sm cursor-pointer"
               title="Abrir Manifiesto & Pitch de Radios Comunitarias"
             >
               <Sparkles size={13} className="text-emerald-200" />
@@ -133,7 +141,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
 
             <button
               onClick={onBackToFrontoffice}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-bold transition-colors border border-gray-700"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold transition-colors border border-slate-200 shadow-xs cursor-pointer"
               title="Volver a la vista pública de la web"
             >
               <ArrowLeft size={14} />
@@ -145,7 +153,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
                 logoutUser();
                 onBackToFrontoffice();
               }}
-              className="p-2 rounded-xl bg-red-950/40 hover:bg-red-900/60 text-red-400 hover:text-white transition-colors border border-red-900/40"
+              className="p-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 transition-colors border border-red-200 cursor-pointer"
               title="Cerrar sesión segura"
             >
               <LogOut size={15} />
@@ -154,17 +162,17 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
         </div>
 
         {/* Barra de Pestañas del Admin */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center gap-2 overflow-x-auto border-t border-gray-800/80 py-1">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center gap-2 overflow-x-auto border-t border-slate-100 py-1.5">
           <button
             onClick={() => {
               setActiveTab('contenidos');
               setIsCreatingNew(false);
               setEditingArticle(null);
             }}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 'contenidos' && !isCreatingNew && !editingArticle
-                ? 'bg-[#b84227] text-white shadow-md'
-                : 'text-gray-400 hover:text-white hover:bg-gray-800/60'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-emerald-800 hover:bg-emerald-50/80'
             }`}
           >
             <FileText size={14} />
@@ -177,10 +185,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
               setIsCreatingNew(false);
               setEditingArticle(null);
             }}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 'multimedia'
-                ? 'bg-[#b84227] text-white shadow-md'
-                : 'text-gray-400 hover:text-white hover:bg-gray-800/60'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-emerald-800 hover:bg-emerald-50/80'
             }`}
           >
             <ImageIcon size={14} />
@@ -193,10 +201,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
               setIsCreatingNew(false);
               setEditingArticle(null);
             }}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 'moderacion'
-                ? 'bg-[#b84227] text-white shadow-md'
-                : 'text-gray-400 hover:text-white hover:bg-gray-800/60'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-emerald-800 hover:bg-emerald-50/80'
             }`}
           >
             <Sliders size={14} />
@@ -214,10 +222,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
               setIsCreatingNew(false);
               setEditingArticle(null);
             }}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 'navegacion'
-                ? 'bg-[#b84227] text-white shadow-md'
-                : 'text-gray-400 hover:text-white hover:bg-gray-800/60'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-emerald-800 hover:bg-emerald-50/80'
             }`}
           >
             <Navigation size={14} />
@@ -230,10 +238,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
               setIsCreatingNew(false);
               setEditingArticle(null);
             }}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 'respaldo'
-                ? 'bg-[#b84227] text-white shadow-md'
-                : 'text-gray-400 hover:text-white hover:bg-gray-800/60'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-emerald-800 hover:bg-emerald-50/80'
             }`}
           >
             <HardDrive size={14} />
@@ -271,9 +279,9 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
         )}
       </main>
 
-      {/* Pie del Santuario */}
-      <footer className="bg-[#12151a] border-t border-gray-800/80 py-4 px-6 text-center text-xs text-gray-500">
-        Panel de Redacción Popular • Red de Noticias del Maule Sur • Todos los cambios son persistentes
+      {/* Pie del Panel de Administrador */}
+      <footer className="bg-white/80 backdrop-blur-md border-t border-slate-200/80 py-4 px-6 text-center text-xs text-slate-500 font-medium">
+        Panel de Administración Territorial • Red de Noticias del Maule Sur • Todos los cambios son persistentes
       </footer>
 
       {/* Modal de Manifiesto & Pitch de Radios Comunitarias */}

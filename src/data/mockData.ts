@@ -43,7 +43,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-1',
     name: 'Don Juan Sepúlveda',
-    avatar: '/images/corr_juan.jpg',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
     role: 'Corresponsal Agrícola y Faena Campesina',
     comuna: 'Longaví',
     cuenca: 'Río Achibueno',
@@ -57,7 +57,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-2',
     name: 'Rosa Albornoz',
-    avatar: '/images/corr_rosa.jpg',
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
     role: 'Corresponsal Comunitaria y Defensora de APR',
     comuna: 'Linares',
     cuenca: 'Río Achibueno',
@@ -71,7 +71,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-3',
     name: 'Margarita Baeza',
-    avatar: '/images/corr_margarita.jpg',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80',
     role: 'Cronista de Saberes y Cultora en Crin',
     comuna: 'Colbún',
     cuenca: 'Río Maule',
@@ -85,7 +85,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-4',
     name: 'Mateo Valenzuela',
-    avatar: '/images/corr_mateo.jpg',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
     role: 'Corresponsal del Secano y Viñas Patrimoniales',
     comuna: 'Cauquenes',
     cuenca: 'Río Loncomilla',
@@ -99,7 +99,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-5',
     name: 'Esteban Retamal',
-    avatar: '/images/corr_esteban.jpg',
+    avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80',
     role: 'Reportero de Servicios Básicos y Red Eléctrica',
     comuna: 'Retiro',
     cuenca: 'Río Perquilauquén',
@@ -113,7 +113,7 @@ export const INITIAL_CORRESPONDENTS: CorrespondentProfile[] = [
   {
     id: 'corr-6',
     name: 'Marcela Fuentes',
-    avatar: '/images/corr_marcela.jpg',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
     role: 'Corresponsal de Salud Rural y Cuidados',
     comuna: 'Panimávida',
     cuenca: 'Río Maule',
@@ -140,10 +140,10 @@ export const INITIAL_ARTICLES: Article[] = [
     cuenca: 'Río Achibueno',
     status: 'publicado',
     isFeatured: true,
-    coverImage: '/images/campo_alfalfa.jpg',
+    coverImage: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
     gallery: [
-      '/images/campo_alfalfa.jpg',
-      '/images/campesino_faena.jpg'
+      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=1200&q=80'
     ],
     hasAudioCapsule: true,
     audioDuration: '01:28',
@@ -177,10 +177,10 @@ export const INITIAL_ARTICLES: Article[] = [
     cuenca: 'Río Achibueno',
     status: 'publicado',
     isBreakingNews: true,
-    coverImage: '/images/apr_vara_gruesa.jpg',
+    coverImage: 'https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=1200&q=80',
     gallery: [
-      '/images/apr_vara_gruesa.jpg',
-      '/images/achibueno_cajon.jpg'
+      'https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80'
     ],
     hasAudioCapsule: true,
     audioDuration: '01:30',
@@ -213,9 +213,9 @@ export const INITIAL_ARTICLES: Article[] = [
     comuna: 'Linares',
     cuenca: 'Río Maule',
     status: 'publicado',
-    coverImage: '/images/semillas_granos.jpg',
+    coverImage: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1200&q=80',
     gallery: [
-      '/images/semillas_granos.jpg'
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1200&q=80'
     ],
     hasAudioCapsule: true,
     audioDuration: '01:30',
@@ -248,9 +248,9 @@ export const INITIAL_ARTICLES: Article[] = [
     comuna: 'Yerbas Buenas',
     cuenca: 'Río Maule',
     status: 'publicado',
-    coverImage: '/images/noticia_semillas.jpg',
+    coverImage: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1200&q=80',
     gallery: [
-      '/images/noticia_semillas.jpg'
+      'https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1200&q=80'
     ],
     hasAudioCapsule: true,
     audioDuration: '01:25',
@@ -283,9 +283,9 @@ export const INITIAL_ARTICLES: Article[] = [
     comuna: 'Colbún',
     cuenca: 'Río Maule',
     status: 'publicado',
-    coverImage: '/images/artesania_manos.jpg',
+    coverImage: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80',
     gallery: [
-      '/images/artesania_manos.jpg'
+      'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80'
     ],
     hasAudioCapsule: true,
     audioDuration: '01:15',
@@ -317,10 +317,10 @@ export const INITIAL_ARTICLES: Article[] = [
     comuna: 'Linares',
     cuenca: 'Río Achibueno',
     status: 'publicado',
-    coverImage: '/images/achibueno_cajon.jpg',
+    coverImage: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80',
     gallery: [
-      '/images/achibueno_cajon.jpg',
-      '/images/cordillera_amanecer.jpg'
+      'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80'
     ],
     hasAudioCapsule: true,
     audioDuration: '01:25',
@@ -352,9 +352,9 @@ export const INITIAL_ARTICLES: Article[] = [
     comuna: 'Longaví',
     cuenca: 'Río Achibueno',
     status: 'publicado',
-    coverImage: '/images/apagon_tormenta.jpg',
+    coverImage: 'https://images.unsplash.com/photo-1516912481808-3406841bd33c?auto=format&fit=crop&w=1200&q=80',
     gallery: [
-      '/images/apagon_tormenta.jpg'
+      'https://images.unsplash.com/photo-1516912481808-3406841bd33c?auto=format&fit=crop&w=1200&q=80'
     ],
     hasAudioCapsule: true,
     audioDuration: '01:10',
@@ -387,9 +387,9 @@ export const INITIAL_ARTICLES: Article[] = [
     comuna: 'Yerbas Buenas',
     cuenca: 'Río Maule',
     status: 'publicado',
-    coverImage: '/images/semillas_granos.jpg',
+    coverImage: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1200&q=80',
     gallery: [
-      '/images/semillas_granos.jpg'
+      'https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1200&q=80'
     ],
     hasAudioCapsule: true,
     audioDuration: '01:20',

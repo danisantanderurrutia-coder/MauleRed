@@ -15,6 +15,7 @@ import {
   Sparkles,
   Check
 } from 'lucide-react';
+import { DEFAULT_UNSPLASH_FALLBACK } from '../../context/AppDataContext';
 
 interface ArticleEditorFormProps {
   initialArticle?: Article | null;
@@ -60,8 +61,8 @@ export const ArticleEditorForm: React.FC<ArticleEditorFormProps> = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Gestor Multimedia (Fotos y Galería)
-  const [coverImage, setCoverImage] = useState(initialArticle?.coverImage || '/images/campo_alfalfa.jpg');
-  const [gallery, setGallery] = useState<string[]>(initialArticle?.gallery || [initialArticle?.coverImage || '/images/campo_alfalfa.jpg']);
+  const [coverImage, setCoverImage] = useState(initialArticle?.coverImage || DEFAULT_UNSPLASH_FALLBACK);
+  const [gallery, setGallery] = useState<string[]>(initialArticle?.gallery || [initialArticle?.coverImage || DEFAULT_UNSPLASH_FALLBACK]);
   const [newImageUrl, setNewImageUrl] = useState('');
 
   // Subida de imagen mediante FileReader base64
@@ -144,8 +145,8 @@ export const ArticleEditorForm: React.FC<ArticleEditorFormProps> = ({
       comuna,
       cuenca,
       status,
-      coverImage: coverImage || '/images/campo_alfalfa.jpg',
-      gallery: gallery.length > 0 ? gallery : [coverImage],
+      coverImage: coverImage || DEFAULT_UNSPLASH_FALLBACK,
+      gallery: gallery.length > 0 ? gallery : [coverImage || DEFAULT_UNSPLASH_FALLBACK],
       hasAudioCapsule,
       audioUrl: hasAudioCapsule ? audioUrl : undefined,
       audioDuration: hasAudioCapsule ? audioDuration : undefined,

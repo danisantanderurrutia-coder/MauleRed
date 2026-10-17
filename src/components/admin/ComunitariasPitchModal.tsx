@@ -329,34 +329,34 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
   const slide = PITCH_SLIDES[currentSlideIndex];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/90 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-900/50 backdrop-blur-md animate-fadeIn">
       {/* Contenedor Principal con Fondo del Paisaje del Maule */}
       <div 
-        className="relative bg-[#0c1218] border border-emerald-500/40 rounded-3xl w-full max-w-5xl max-h-[94vh] flex flex-col shadow-2xl overflow-hidden text-gray-100"
+        className="relative bg-white/95 border border-emerald-200 rounded-3xl w-full max-w-5xl max-h-[94vh] flex flex-col shadow-2xl overflow-hidden text-slate-800"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(10, 18, 15, 0.94), rgba(12, 18, 24, 0.96)), url('./images/maule_campo_cielo.jpg')`,
+          backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.90), rgba(248, 250, 252, 0.94)), url('./images/maule_campo_cielo.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
         
         {/* Cabecera Superior: Contexto y Navegación de Categorías */}
-        <div className="bg-[#0f191f]/90 backdrop-blur-md px-5 py-4 border-b border-emerald-950/80 flex items-center justify-between gap-4 flex-wrap">
+        <div className="bg-white/90 backdrop-blur-md px-5 py-4 border-b border-emerald-100 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white shadow-md shadow-emerald-950/50 flex-shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white shadow-md shadow-emerald-700/20 flex-shrink-0">
               <Radio size={20} className="animate-pulse" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
                   Pitch & Manifiesto Estratégico
                 </span>
-                <span className="text-gray-400 text-xs hidden sm:inline">•</span>
-                <span className="text-gray-300 text-xs font-semibold hidden sm:inline">
+                <span className="text-slate-300 text-xs hidden sm:inline">•</span>
+                <span className="text-slate-600 text-xs font-semibold hidden sm:inline">
                   Red de Radios Populares del Maule
                 </span>
               </div>
-              <h2 className="text-sm sm:text-base font-bold text-white leading-tight">
+              <h2 className="text-sm sm:text-base font-bold text-slate-900 leading-tight">
                 Maule Red: Soberanía Sonora, Radioteatro e IA Lúcida
               </h2>
             </div>
@@ -364,14 +364,14 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
 
           <div className="flex items-center gap-2.5">
             {/* Contador de Slides */}
-            <span className="text-xs font-mono font-bold px-3 py-1 rounded-xl bg-gray-900/80 text-emerald-400 border border-emerald-900/50">
+            <span className="text-xs font-mono font-bold px-3 py-1 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200">
               {String(currentSlideIndex + 1).padStart(2, '0')} / {String(PITCH_SLIDES.length).padStart(2, '0')}
             </span>
 
             {/* Botón Cerrar */}
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-xl bg-gray-800/80 hover:bg-gray-700 text-gray-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer border border-gray-700/60"
+              className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 flex items-center justify-center transition-colors cursor-pointer border border-slate-200"
               aria-label="Cerrar modal"
             >
               ✕
@@ -380,7 +380,7 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
         </div>
 
         {/* Barra de progreso / Píldoras de Diapositivas */}
-        <div className="bg-[#0b1216]/95 border-b border-emerald-950/60 px-5 py-2.5 flex items-center gap-1.5 overflow-x-auto">
+        <div className="bg-slate-50/90 border-b border-slate-200/80 px-5 py-2.5 flex items-center gap-1.5 overflow-x-auto">
           {PITCH_SLIDES.map((s, idx) => {
             const isActive = idx === currentSlideIndex;
             return (
@@ -389,8 +389,8 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
                 onClick={() => setCurrentSlideIndex(idx)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                   isActive
-                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/40 ring-1 ring-emerald-400'
-                    : 'bg-gray-900/60 text-gray-400 hover:text-gray-200 hover:bg-gray-800/80 border border-gray-800/50'
+                    ? 'bg-emerald-600 text-white shadow-xs ring-1 ring-emerald-500'
+                    : 'bg-white text-slate-600 hover:text-emerald-800 hover:bg-emerald-50/80 border border-slate-200'
                 }`}
               >
                 <span>{s.categoryIcon}</span>
@@ -406,17 +406,17 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
           {/* Encabezado del Slide Actual */}
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-emerald-400 text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
+              <span className="text-emerald-700 text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
                 {slide.categoryIcon}
                 <span>{slide.category}</span>
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-black font-serif text-white tracking-tight leading-snug">
+            <h1 className="text-2xl sm:text-3xl font-black font-serif text-slate-950 tracking-tight leading-snug">
               {slide.title}
             </h1>
 
-            <p className="text-sm sm:text-base text-emerald-100/80 mt-1 max-w-3xl leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 mt-1 max-w-3xl leading-relaxed">
               {slide.subtitle}
             </p>
           </div>
@@ -426,22 +426,22 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
             
             {/* Columna Izquierda: Imagen y Takeaway (5 cols) */}
             <div className="lg:col-span-5 space-y-3.5">
-              <div className="relative rounded-2xl overflow-hidden border border-emerald-500/30 shadow-xl group">
+              <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md group">
                 <img
                   src={slide.image}
                   alt={slide.imageAlt}
                   className="w-full h-56 sm:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-3.5">
-                  <span className="text-[11px] text-gray-200 font-medium">
+                  <span className="text-[11px] text-white font-medium">
                     {slide.imageCaption}
                   </span>
                 </div>
               </div>
 
               {/* Tesis / Takeaway Destacado */}
-              <div className="bg-emerald-950/40 border border-emerald-800/40 p-4 rounded-2xl text-xs sm:text-sm text-emerald-200 leading-relaxed shadow-sm">
-                <div className="flex items-center gap-2 font-bold text-emerald-300 text-xs mb-1">
+              <div className="bg-emerald-50/95 border border-emerald-200/90 p-4 rounded-2xl text-xs sm:text-sm text-emerald-950 leading-relaxed shadow-2xs">
+                <div className="flex items-center gap-2 font-bold text-emerald-800 text-xs mb-1">
                   <Lightbulb size={15} />
                   <span>Idea Fuerza</span>
                 </div>
@@ -450,9 +450,9 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
 
               {/* Cita si existe */}
               {slide.quote && (
-                <div className="bg-gray-900/60 border border-gray-800 p-4 rounded-2xl text-xs text-gray-300 italic">
+                <div className="bg-white/90 border border-slate-200 p-4 rounded-2xl text-xs text-slate-700 italic shadow-2xs">
                   <p>«{slide.quote.text}»</p>
-                  <p className="text-right text-[10px] text-emerald-400 font-bold not-italic mt-2">
+                  <p className="text-right text-[10px] text-emerald-700 font-bold not-italic mt-2">
                     — {slide.quote.author}
                   </p>
                 </div>
@@ -464,22 +464,22 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
               {slide.points.map((pt, i) => (
                 <div
                   key={i}
-                  className="bg-[#141b22]/90 hover:bg-[#18232c] border border-emerald-900/40 hover:border-emerald-600/50 p-4 sm:p-5 rounded-2xl transition-all shadow-sm group"
+                  className="bg-white/90 hover:bg-white border border-slate-200 hover:border-emerald-400 p-4 sm:p-5 rounded-2xl transition-all shadow-xs hover:shadow-md group"
                 >
                   <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <h3 className="font-bold text-sm sm:text-base text-white group-hover:text-emerald-300 transition-colors flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-lg bg-emerald-950 text-emerald-400 text-xs font-mono font-bold flex items-center justify-center border border-emerald-800/60">
+                    <h3 className="font-bold text-sm sm:text-base text-slate-900 group-hover:text-emerald-700 transition-colors flex items-center gap-2">
+                      <span className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-mono font-bold flex items-center justify-center border border-emerald-200">
                         {i + 1}
                       </span>
                       <span>{pt.title}</span>
                     </h3>
                     {pt.badge && (
-                      <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 flex-shrink-0">
+                      <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 flex-shrink-0">
                         {pt.badge}
                       </span>
                     )}
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed pl-8">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-8">
                     {pt.description}
                   </p>
                 </div>
@@ -491,15 +491,15 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
         </div>
 
         {/* Barra Inferior de Navegación de Diapositivas */}
-        <div className="bg-[#0b1216]/95 border-t border-emerald-950/80 px-6 py-4 flex items-center justify-between gap-4">
+        <div className="bg-white/95 border-t border-slate-200/80 px-6 py-4 flex items-center justify-between gap-4">
           
           <button
             onClick={() => setCurrentSlideIndex((prev) => Math.max(0, prev - 1))}
             disabled={currentSlideIndex === 0}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               currentSlideIndex === 0
-                ? 'opacity-40 cursor-not-allowed text-gray-500 bg-gray-900'
-                : 'bg-gray-800 hover:bg-gray-700 text-gray-200 hover:text-white border border-gray-700'
+                ? 'opacity-40 cursor-not-allowed text-slate-400 bg-slate-100'
+                : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'
             }`}
           >
             <ChevronLeft size={16} />
@@ -514,8 +514,8 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
                 onClick={() => setCurrentSlideIndex(dotIdx)}
                 className={`transition-all rounded-full cursor-pointer ${
                   dotIdx === currentSlideIndex
-                    ? 'w-6 h-2 bg-emerald-400'
-                    : 'w-2 h-2 bg-gray-700 hover:bg-gray-500'
+                    ? 'w-6 h-2 bg-emerald-600'
+                    : 'w-2 h-2 bg-slate-300 hover:bg-slate-400'
                 }`}
                 aria-label={`Ir al slide ${dotIdx + 1}`}
               />
@@ -527,8 +527,8 @@ export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => 
             disabled={currentSlideIndex === PITCH_SLIDES.length - 1}
             className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               currentSlideIndex === PITCH_SLIDES.length - 1
-                ? 'opacity-40 cursor-not-allowed text-gray-500 bg-gray-900'
-                : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-950/60 ring-1 ring-emerald-400'
+                ? 'opacity-40 cursor-not-allowed text-slate-400 bg-slate-100'
+                : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm shadow-emerald-600/30'
             }`}
           >
             <span>Siguiente</span>

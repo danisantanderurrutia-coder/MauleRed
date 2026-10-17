@@ -36,22 +36,41 @@ const STORAGE_KEY = 'MAULE_SUR_PLATFORM_V5';
 const AUTH_STORAGE_KEY = 'MAULE_SUR_AUTH_USER';
 const DATA_SAVER_KEY = 'MAULE_SUR_DATA_SAVER_3G';
 
+export const DEFAULT_UNSPLASH_FALLBACK = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
+
 // Helper to normalize image paths for both relative base, root domain, and GitHub Pages
-export const getCleanImageUrl = (url: string | undefined, fallback = '/images/campo_alfalfa.jpg'): string => {
-  if (!url) return fallback;
-  // If user has old unsplash URLs cached in localStorage, replace with local assets
-  if (url.includes('unsplash.com')) {
-    if (url.includes('1544717302') || url.includes('sepulveda')) return '/images/corr_juan.jpg';
-    if (url.includes('1573496359') || url.includes('albornoz')) return '/images/corr_rosa.jpg';
-    if (url.includes('1567532939') || url.includes('baeza')) return '/images/corr_margarita.jpg';
-    if (url.includes('1507003211') || url.includes('mateo')) return '/images/corr_mateo.jpg';
-    if (url.includes('1500648767') || url.includes('esteban')) return '/images/corr_esteban.jpg';
-    if (url.includes('1544005313') || url.includes('marcela')) return '/images/corr_marcela.jpg';
-    if (url.includes('1585320806')) return '/images/noticia_semillas.jpg';
-    if (url.includes('1542601906')) return '/images/moderacion_default.jpg';
-    return fallback;
+export const getCleanImageUrl = (url: string | undefined, fallback = DEFAULT_UNSPLASH_FALLBACK): string => {
+  if (!url || typeof url !== 'string' || !url.trim()) return fallback;
+
+  // Si ya es una URL externa de Unsplash, https o base64 válida, mantenerla directamente
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:image/')) {
+    return url;
   }
-  return url;
+
+  // Mapear rutas locales antiguas a fotografías correspondientes en Unsplash
+  if (url.includes('alfalfa') || url.includes('campo')) {
+    return 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
+  }
+  if (url.includes('apr') || url.includes('vara_gruesa')) {
+    return 'https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=1200&q=80';
+  }
+  if (url.includes('semillas') || url.includes('granos')) {
+    return 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1200&q=80';
+  }
+  if (url.includes('artesania') || url.includes('manos')) {
+    return 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80';
+  }
+  if (url.includes('achibueno') || url.includes('cajon') || url.includes('rio')) {
+    return 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80';
+  }
+  if (url.includes('apagon') || url.includes('tormenta')) {
+    return 'https://images.unsplash.com/photo-1516912481808-3406841bd33c?auto=format&fit=crop&w=1200&q=80';
+  }
+  if (url.includes('corr_')) {
+    return 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80';
+  }
+
+  return fallback;
 };
 
 interface AppDataContextType {
