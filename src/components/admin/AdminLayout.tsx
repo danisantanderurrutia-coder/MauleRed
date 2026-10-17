@@ -123,10 +123,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
 
             <button
               onClick={() => setShowPitchModal(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-600 to-[#b84227] hover:from-amber-500 hover:to-[#c7462b] text-white text-xs font-black transition-all border border-amber-400/40 shadow-sm cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white text-xs font-black transition-all border border-emerald-400/40 shadow-sm cursor-pointer"
               title="Abrir Manifiesto & Pitch de Radios Comunitarias"
             >
-              <Sparkles size={13} className="text-amber-200" />
+              <Sparkles size={13} className="text-emerald-200" />
               <span>Pitch Comunitarias</span>
             </button>
 

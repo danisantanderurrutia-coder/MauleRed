@@ -77,10 +77,10 @@ export const ContentManager: React.FC<ContentManagerProps> = ({
         <div className="flex items-center gap-2.5 flex-wrap self-start sm:self-auto">
           <button
             onClick={() => setShowPitchModal(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-[#b84227] hover:from-amber-500 hover:to-[#c4492d] text-white font-black text-xs shadow-md transition-all active:scale-95 border border-amber-400/40 cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-black text-xs shadow-md transition-all active:scale-95 border border-emerald-400/40 cursor-pointer"
             title="Abrir el Pitch de Radios Comunitarias, Radioteatro e IA Lúcida"
           >
-            <Sparkles size={15} className="text-amber-200 animate-pulse" />
+            <Sparkles size={15} className="text-emerald-200 animate-pulse" />
             <span>Pitch Comunitarias & Radioteatro</span>
           </button>
 

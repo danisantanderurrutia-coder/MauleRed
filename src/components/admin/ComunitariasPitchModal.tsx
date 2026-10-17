@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Radio, 
   Sparkles, 
@@ -8,472 +8,533 @@ import {
   ShieldAlert, 
   HeartHandshake, 
   Compass, 
-  Share2, 
-  Tv, 
   Drama, 
   ChevronRight, 
+  ChevronLeft, 
   CheckCircle2, 
   AlertCircle, 
   Layers, 
   MessageSquare, 
   Lightbulb, 
-  Award,
-  Zap,
+  Zap, 
+  Share2, 
+  Volume2, 
+  Clock, 
+  Leaf, 
+  ArrowRight,
+  Sliders,
   Flame,
-  ArrowRight
+  Check
 } from 'lucide-react';
+
+interface SlideData {
+  id: number;
+  category: string;
+  categoryIcon: React.ReactNode;
+  title: string;
+  subtitle: string;
+  image: string;
+  imageAlt: string;
+  imageCaption: string;
+  keyTakeaway: string;
+  points: {
+    title: string;
+    description: string;
+    badge?: string;
+  }[];
+  quote?: {
+    text: string;
+    author: string;
+  };
+}
+
+const PITCH_SLIDES: SlideData[] = [
+  // SLIDE 1: El Manifiesto Territorial
+  {
+    id: 1,
+    category: 'El Manifiesto Territorial',
+    categoryIcon: <Compass size={15} className="text-emerald-400" />,
+    title: 'La Radio Comunitaria como Antídoto a la Soledad Rural',
+    subtitle: 'Nuestra competencia no es la televisión metropolitana ni las redes sociales: es el aislamiento geográfico y la fragilidad del bolsillo campesino.',
+    image: './images/maule_campo_cielo.jpg',
+    imageAlt: 'Campo del Maule con colinas verdes y cielo majestuoso',
+    imageCaption: 'Valle Central del Maule: soberanía informativa desde las cuencas.',
+    keyTakeaway: 'La radio no es solo un transmisor: es el tejido vivo que conecta a las comunidades antes de que la noticia deba pasar por Santiago.',
+    points: [
+      {
+        title: 'El Criterio del Bolsillo',
+        description: 'Información con valor monetario y de supervivencia: insumos agrícolas, turnos de riego, subsidios públicos explicados sin trámites engorrosos y alertas agroclimáticas oportunas.',
+        badge: 'Impacto Real'
+      },
+      {
+        title: 'Enfoque de Cuencas Vivas',
+        description: 'Los ríos (Achibueno, Melado, Loncomilla, Perquilauquén) definen la identidad de nuestros pueblos, no las divisiones administrativas de oficina central.',
+        badge: 'Territorial'
+      },
+      {
+        title: 'Soberanía Sonora 3G & Offline',
+        description: 'Formatos en audio comprimido que se descargan con un segundo de cobertura y suenan en la cabina del tractor o en una radio a pilas durante temporales.',
+        badge: 'Resiliencia'
+      }
+    ],
+    quote: {
+      text: 'Cuando se corta la fibra óptica en un invierno cordillerano, la radio popular y el audio vecinal son lo único que mantiene encendida la comunidad.',
+      author: 'Principios de Redacción Territorial'
+    }
+  },
+
+  // SLIDE 2: Corresponsalías de Raíz
+  {
+    id: 2,
+    category: 'El Manifiesto Territorial',
+    categoryIcon: <Users size={15} className="text-emerald-400" />,
+    title: 'Corresponsales de Raíz: El Saber que Brota del Surco',
+    subtitle: 'La credibilidad no se compra con micrófonos caros; se construye con personas que viven y trabajan en el mismo suelo.',
+    image: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Cosecha agrícola y manos en la tierra rural',
+    imageCaption: 'Cronistas de territorio: agricultores, dirigentas vecinales y docentes rurales.',
+    keyTakeaway: 'Un mensaje de audio de 90 segundos grabado en el camino vecinal vale más que un despacho de estudio central.',
+    points: [
+      {
+        title: 'La Dirigenta de Agua Potable (APR)',
+        description: 'Conoce cada filtración de matriz, las fechas de corte y la verdad sobre los aforos de los pozos. Su testimonio genera confianza inmediata.',
+        badge: 'Gestión Local'
+      },
+      {
+        title: 'El Productor y la Faena Agrícola',
+        description: 'Sabe cuánto pagan el fardo en la feria, cuándo pega la helada negra y qué insumos están escaseando en los almacenes rurales.',
+        badge: 'Voz Productiva'
+      },
+      {
+        title: 'El Educador Rural y de Salud',
+        description: 'El termómetro de las familias en las postas rurales y escuelas unidocentes. Comunican necesidades de traslado y campañas de salud.',
+        badge: 'Tejido Social'
+      }
+    ],
+    quote: {
+      text: 'No pedimos títulos de periodismo de oficina: pedimos honestidad comunitaria, afecto por el valle y conocimiento del territorio.',
+      author: 'Criterio de Redacción de Cuenca'
+    }
+  },
+
+  // SLIDE 3: Radioteatro & Ficción Sonora (Matrices Creativas)
+  {
+    id: 3,
+    category: 'Radioteatro & Ficción Sonora',
+    categoryIcon: <Drama size={15} className="text-emerald-400" />,
+    title: 'Matrices de Ficción Sonora: Reencantar la Imaginación',
+    subtitle: 'El radioteatro no es nostalgia del pasado; es el formato de mayor retención porque despierta la imaginación y reúne a toda la familia frente al parlante.',
+    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Estudio de grabación de sonido y audífonos',
+    imageCaption: 'Laboratorio de audio: estimulando la creatividad local sin corsés impuestos.',
+    keyTakeaway: 'No imponemos guiones cerrados: entregamos marcos conceptuales para que cada comunidad descubra y narre sus propias historias.',
+    points: [
+      {
+        title: 'Matriz 1: Memoria Viva y Raíz de la Cuenca',
+        description: 'Arquetipo para rescatar las vivencias de la transformación del campo, los relatos de antiguos oficios, los recuerdos de temporales y la historia oral no documentada.',
+        badge: 'Memoria Histórica'
+      },
+      {
+        title: 'Matriz 2: Geografía Sagrada y Misterio del Monte',
+        description: 'Arquetipo para explorar la relación poética y enigmática con la naturaleza: los espíritus del bosque nativo, los rumores del río de noche y los enigmas cordilleranos.',
+        badge: 'Mitología Local'
+      },
+      {
+        title: 'Efectos Sonoros Orgánicos (Foley Popular)',
+        description: 'Aprovechar los sonidos del propio entorno: ramas secas, acequias, viento en los álamos y el fogón como instrumentos de dramatización.',
+        badge: 'Arte Sonoro'
+      }
+    ]
+  },
+
+  // SLIDE 4: Radioteatro & Participación Juvenil
+  {
+    id: 4,
+    category: 'Radioteatro & Ficción Sonora',
+    categoryIcon: <Sparkles size={15} className="text-emerald-400" />,
+    title: 'Sátira Cotidiana y Microficción Escolar',
+    subtitle: 'El humor popular y los lenguajes juveniles como imanes para que las nuevas generaciones se apropien de la frecuencia comunitaria.',
+    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Jóvenes compartiendo al aire libre en comunidad',
+    imageCaption: 'Creación comunitaria: liceos rurales y vecinos produciendo cápsulas de 60 segundos.',
+    keyTakeaway: 'Reírse de las peripecias diarias humaniza los problemas y activa la creatividad de los jóvenes creadores.',
+    points: [
+      {
+        title: 'Matriz 3: Sátira Costumbrista y Pedagogía',
+        description: 'El humor como vehículo educativo: pequeñas dramatizaciones sobre el enredo de las boletas eléctricas, los trámites absurdos de ventanilla y la astucia campesina.',
+        badge: 'Humor Crítico'
+      },
+      {
+        title: 'Matriz 4: Laboratorios de Microficción Escolar',
+        description: 'Convocatorias abiertas donde talleres de colegios rurales crean relatos de 60 a 90 segundos grabados con sus teléfonos móviles y musicalizados por la radio.',
+        badge: 'Apertura Juvenil'
+      },
+      {
+        title: 'Distribución Transmedia',
+        description: 'El radioteatro sale al aire en FM, pero se comparte en TikTok, Reels y Spotify como piezas sonoras virales que enorgullecen al territorio.',
+        badge: 'Multiplataforma'
+      }
+    ]
+  },
+
+  // SLIDE 5: Inteligencia Artificial Crítica
+  {
+    id: 5,
+    category: 'IA Lúcida y Comunitaria',
+    categoryIcon: <ShieldAlert size={15} className="text-emerald-400" />,
+    title: 'Mirada Crítica: Los Riesgos de la Homogeneización',
+    subtitle: 'Ni tecnofobia retrógrada ni deslumbramiento ingenuo: entendemos con claridad qué peligros encierra la IA para la cultura local.',
+    image: 'https://images.unsplash.com/photo-1507499739999-097706ad8914?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Claroscuro y reflexión ética tecnológica',
+    imageCaption: 'Vigilancia ética: proteger el dialecto campesino y la veracidad territorial.',
+    keyTakeaway: 'Un modelo de lenguaje entrenado en servidores de Silicon Valley no sabe cuánto calienta un mate en el invierno de la precordillera.',
+    points: [
+      {
+        title: 'El Freno a la Homogeneización Cultural',
+        description: 'La IA tiende a borrar modismos, ritmos y entonaciones locales para estandarizar el lenguaje en un tono periodístico neutro y frío. Eso lo combatimos frontalmente.',
+        badge: 'Alerta Cultural'
+      },
+      {
+        title: 'Riesgo de Alucinación en Datos Sensibles',
+        description: 'En materias delicadas (derechos de agua, deudas agrícolas, subsidios, emergencias climáticas), jamás se publica una sola coma generada sin verificación humana.',
+        badge: 'Rigor Territorial'
+      },
+      {
+        title: 'Rechazo al Periodismo Perezoso',
+        description: 'No aceptamos notas autogeneradas de oficina que reemplacen el trabajo de caminar, observar la cosecha o escuchar las quejas vecinales cara a cara.',
+        badge: 'Ética Informativa'
+      }
+    ]
+  },
+
+  // SLIDE 6: Inteligencia Artificial a Favor
+  {
+    id: 6,
+    category: 'IA Lúcida y Comunitaria',
+    categoryIcon: <Zap size={15} className="text-emerald-400" />,
+    title: 'La IA como Secretaria Técnica Popular',
+    subtitle: 'A favor de la IA cuando democratiza el tiempo, derrumba barreras burocráticas y potencia las manos de los equipos comunitarios.',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Ondas digitales etéreas en tonalidades verdes orgánicas',
+    imageCaption: 'Multiplicación de capacidades: la tecnología al servicio de la voz popular.',
+    keyTakeaway: '«La IA es secretaria de redacción; nunca el corazón, ni el criterio, ni el afecto de la radio».',
+    points: [
+      {
+        title: 'Traductora de Jerga Burocrática',
+        description: 'Procesa decretos de 40 páginas, leyes de riego o reglamentos de subsidios y los traduce a las 3 preguntas clave: ¿A quién beneficia? ¿Cuánto cubre? ¿Qué documento llevo el lunes?',
+        badge: 'Utilidad Directa'
+      },
+      {
+        title: 'Desgrabación Rápida de Audios de Faena',
+        description: 'Un corresponsal envía un audio de WhatsApp de 5 minutos mientras maneja el tractor o riega; la IA extrae los hechos centrales y genera el borrador para que el editor pula.',
+        badge: 'Eficiencia'
+      },
+      {
+        title: 'Asistente de Escaletas y Foley Sonoro',
+        description: 'Sugiere estructuras de guiones, orden dramático y listas de efectos sonoros para facilitar el montaje de radioteatros en comunidades pequeñas.',
+        badge: 'Soporte Creativo'
+      }
+    ]
+  },
+
+  // SLIDE 7: Imanes de Comunidad
+  {
+    id: 7,
+    category: 'Imanes de Comunidad',
+    categoryIcon: <HeartHandshake size={15} className="text-emerald-400" />,
+    title: 'Fórmulas Vivas de Participación y Encuentro',
+    subtitle: 'Si la radio no soluciona problemas ni genera comunidad real, se convierte en un simple monólogo que la gente apaga.',
+    image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Micrófono de transmisión comunitaria vintage',
+    imageCaption: 'Plaza pública sonora: donde el vecino es protagonista y no simple espectador.',
+    keyTakeaway: 'La radio popular funciona cuando la gente siente que el micrófono es de su propiedad.',
+    points: [
+      {
+        title: 'Bolsa de Trueque Campesino',
+        description: 'Espacio al aire y en la web para intercambiar sin dinero: guano por forraje, plantines de tomate por leña seca, herramientas por ayuda de faena.',
+        badge: 'Economía Solidaria'
+      },
+      {
+        title: 'Semáforo de Precios de Ferias',
+        description: 'Publicación de precios reales de hortalizas, papas y ganado para evitar que los intermediarios abusen castigando al pequeño agricultor.',
+        badge: 'Bolsillo'
+      },
+      {
+        title: 'Asambleas Radiales Abiertas',
+        description: 'Conexión en directo con autoridades locales y encargados de servicios para responder dudas vecinales al aire sin filtro partidista.',
+        badge: 'Democracia Local'
+      }
+    ]
+  },
+
+  // SLIDE 8: Ecosistema Híbrido
+  {
+    id: 8,
+    category: 'Ecosistema Híbrido',
+    categoryIcon: <Radio size={15} className="text-emerald-400" />,
+    title: 'El Puente Técnico: Del Dial FM a la Red 3G',
+    subtitle: 'Una arquitectura accesible que combina la onda hertziana analógica con cápsulas digitales para no dejar a nadie atrás.',
+    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Campos y colinas doradas bajo el sol del atardecer',
+    imageCaption: 'Sinergia tecnológica: lo análogo resiste temporales, lo digital amplifica redes.',
+    keyTakeaway: 'Construimos una red mutante: firme en el territorio físico y ligera en los canales digitales.',
+    points: [
+      {
+        title: 'Onda Sonora Hertziana (FM)',
+        description: 'La única señal que entra a los rincones profundos de la precordillera donde no llega la fibra ni la antena de telefonía celular.',
+        badge: 'Cobertura Universal'
+      },
+      {
+        title: 'Cápsulas de WhatsApp (60 a 90s)',
+        description: 'Archivos ultra ligeros de menos de 1 MB que circulan de mano en mano entre comités vecinales y familias campesinas sin gastar saldo.',
+        badge: 'Bajo Consumo'
+      },
+      {
+        title: 'Plataforma Web & Archivo Comunitario',
+        description: 'Un repositorio centralizado donde los artículos, las fichas de utilidad y los podcasts quedan guardados como patrimonio territorial vivo.',
+        badge: 'Memoria Digital'
+      }
+    ],
+    quote: {
+      text: 'La verdadera modernidad no es copiar las modas de la capital, sino dotar a las comunidades rurales de las mejores herramientas para contar su propia verdad.',
+      author: 'Manifiesto Maule Red'
+    }
+  }
+];
 
 export const ComunitariasPitchModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   isOpen,
   onClose
 }) => {
-  const [activeTab, setActiveTab] = useState<'pitch' | 'radioteatro' | 'ia_critica' | 'laboratorio'>('pitch');
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  // Navegación con teclado
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        setCurrentSlideIndex((prev) => (prev < PITCH_SLIDES.length - 1 ? prev + 1 : prev));
+      } else if (e.key === 'ArrowLeft') {
+        setCurrentSlideIndex((prev) => (prev > 0 ? prev - 1 : prev));
+      } else if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
+  const slide = PITCH_SLIDES[currentSlideIndex];
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="bg-[#12161c] border-2 border-amber-500/40 rounded-3xl w-full max-w-5xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden text-gray-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/90 backdrop-blur-md animate-fadeIn">
+      {/* Contenedor Principal con Fondo del Paisaje del Maule */}
+      <div 
+        className="relative bg-[#0c1218] border border-emerald-500/40 rounded-3xl w-full max-w-5xl max-h-[94vh] flex flex-col shadow-2xl overflow-hidden text-gray-100"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(10, 18, 15, 0.94), rgba(12, 18, 24, 0.96)), url('./images/maule_campo_cielo.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
         
-        {/* Cabecera del Pitch */}
-        <div className="bg-gradient-to-r from-[#1c242c] via-[#241a16] to-[#17201c] p-6 border-b border-gray-800 flex items-start justify-between gap-4">
-          <div className="flex items-start gap-4">
-            <div className="p-3.5 bg-gradient-to-br from-amber-500 to-[#b84227] rounded-2xl text-white shadow-lg flex-shrink-0">
-              <Radio size={28} className="animate-pulse" />
+        {/* Cabecera Superior: Contexto y Navegación de Categorías */}
+        <div className="bg-[#0f191f]/90 backdrop-blur-md px-5 py-4 border-b border-emerald-950/80 flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white shadow-md shadow-emerald-950/50 flex-shrink-0">
+              <Radio size={20} className="animate-pulse" />
             </div>
             <div>
-              <div className="flex items-center gap-2 flex-wrap mb-1">
-                <span className="bg-amber-400 text-gray-950 font-black text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-xs">
-                  Manifiesto & Estrategia 2026-2027
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  Pitch & Manifiesto Estratégico
                 </span>
-                <span className="bg-emerald-500/20 text-emerald-300 font-bold text-[10px] px-2 py-0.5 rounded-full border border-emerald-500/30">
-                  Modelo Comunitario Vivo
+                <span className="text-gray-400 text-xs hidden sm:inline">•</span>
+                <span className="text-gray-300 text-xs font-semibold hidden sm:inline">
+                  Red de Radios Populares del Maule
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-black font-serif text-white tracking-tight">
-                Maule Red: El Pitch Territorial de las Radios Comunitarias
+              <h2 className="text-sm sm:text-base font-bold text-white leading-tight">
+                Maule Red: Soberanía Sonora, Radioteatro e IA Lúcida
               </h2>
-              <p className="text-xs sm:text-sm text-gray-300 mt-0.5 max-w-2xl">
-                Cómo transformamos la radio rural y comunitaria en una red mutante, entretenida, indispensable para el bolsillo y lúcidamente potenciada con Inteligencia Artificial.
-              </p>
             </div>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-colors cursor-pointer"
-            aria-label="Cerrar ventana"
-          >
-            ✕
-          </button>
-        </div>
+          <div className="flex items-center gap-2.5">
+            {/* Contador de Slides */}
+            <span className="text-xs font-mono font-bold px-3 py-1 rounded-xl bg-gray-900/80 text-emerald-400 border border-emerald-900/50">
+              {String(currentSlideIndex + 1).padStart(2, '0')} / {String(PITCH_SLIDES.length).padStart(2, '0')}
+            </span>
 
-        {/* Barra de Navegación del Pitch */}
-        <div className="flex items-center gap-1.5 px-6 pt-3 pb-2 bg-[#161a22] border-b border-gray-800 overflow-x-auto text-xs font-bold">
-          <button
-            onClick={() => setActiveTab('pitch')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
-              activeTab === 'pitch'
-                ? 'bg-[#b84227] text-white shadow-md ring-1 ring-amber-400/50'
-                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/60'
-            }`}
-          >
-            <Compass size={15} />
-            <span>1. El Gran Pitch Territorial</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('radioteatro')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
-              activeTab === 'radioteatro'
-                ? 'bg-[#b84227] text-white shadow-md ring-1 ring-amber-400/50'
-                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/60'
-            }`}
-          >
-            <Drama size={15} className="text-amber-400" />
-            <span>2. Radioteatro & Ficción Popular</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('ia_critica')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
-              activeTab === 'ia_critica'
-                ? 'bg-[#b84227] text-white shadow-md ring-1 ring-amber-400/50'
-                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/60'
-            }`}
-          >
-            <Bot size={15} className="text-sky-400" />
-            <span>3. Inteligencia Artificial: Lúcida & Crítica</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('laboratorio')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
-              activeTab === 'laboratorio'
-                ? 'bg-[#b84227] text-white shadow-md ring-1 ring-amber-400/50'
-                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/60'
-            }`}
-          >
-            <Zap size={15} className="text-emerald-400" />
-            <span>4. Imanes de Comunidad & Fórmulas</span>
-          </button>
-        </div>
-
-        {/* Cuerpo con Scroll */}
-        <div className="p-6 overflow-y-auto space-y-6 flex-1 text-sm leading-relaxed">
-          
-          {/* TAB 1: EL PITCH */}
-          {activeTab === 'pitch' && (
-            <div className="space-y-6 animate-fadeIn">
-              
-              {/* Tesis Principal */}
-              <div className="p-5 rounded-2xl bg-gradient-to-r from-amber-950/40 via-amber-900/20 to-transparent border border-amber-500/30">
-                <span className="text-[10px] font-black uppercase text-amber-400 tracking-wider flex items-center gap-1.5 mb-1.5">
-                  <Flame size={14} /> La Tesis Fundamental
-                </span>
-                <h3 className="text-lg font-black font-serif text-white leading-snug">
-                  "La radio comunitaria no compite con la televisión ni con el algoritmo de TikTok: compite contra la soledad rural, la desinformación centralista y la fragilidad del bolsillo."
-                </h3>
-                <p className="text-xs text-gray-300 mt-2">
-                  Cuando se corta la luz en Longaví o se enturbia el agua del APR en Vara Gruesa, las redes sociales de Santiago son inútiles. La única antena que sigue transmitiendo con una batería de auto y un micrófono es la comunitaria. Pero para que la comunidad la escuche en la calma, no podemos sonar a aburrimiento ni a panfleto: tenemos que ser <strong className="text-amber-300">sabrosos, indispensables y comunitariamente vivos</strong>.
-                </p>
-              </div>
-
-              {/* 3 Pilares del Pitch */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2">
-                  <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black">
-                    1
-                  </div>
-                  <h4 className="font-black text-white text-base">Efecto Bolsillo Inmediato</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">
-                    Si la nota no le sirve a la abuela para no perder el bono, al feriante para saber a cuánto vender la papa o al vecino para reclamar por el motor quemado, se queda corta. Noticias en 3 bloques: <em>¿Qué pasó?</em>, <em>La causa en simple</em> y <em>La solución con teléfonos útiles</em>.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black">
-                    2
-                  </div>
-                  <h4 className="font-black text-white text-base">Red Mutante de Cuencas</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">
-                    No somos una sola radio solitaria en un cerro: somos la confederación del Achibueno, el Perquilauquén, el Loncomilla y el Maule. El contenido se despacha en cápsulas de 90 segundos que circulan por WhatsApp y se retransmiten en cadena libre.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2">
-                  <div className="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-black">
-                    3
-                  </div>
-                  <h4 className="font-black text-white text-base">Soberanía Tecnológica 3G</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">
-                    Plataforma ultra-liviana pensada para teléfonos chinos con pantallas quebradas y planes prepago en faenas agrícolas. Sin dependencias de Silicon Valley: imágenes locales, audio liviano y acceso offline instantáneo.
-                  </p>
-                </div>
-              </div>
-
-              {/* ¿A quién le hablamos? */}
-              <div className="bg-[#181d24] p-5 rounded-2xl border border-gray-800 space-y-3">
-                <h4 className="font-black text-sm text-amber-400 uppercase tracking-wider flex items-center gap-2">
-                  <Users size={16} /> ¿Quiénes hacen viva esta red?
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-300">
-                  <div className="flex items-start gap-2.5 bg-[#12161c] p-3 rounded-xl border border-gray-800/60">
-                    <CheckCircle2 size={16} className="text-emerald-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-bold">El Corresponsal de Huerto y Tractor:</strong>
-                      Don Juan en Longaví o Mateo en Cauquenes. No estudiaron periodismo en Providencia; conocen el precio del abono, la helada negra y la maña del canal de regadío.
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2.5 bg-[#12161c] p-3 rounded-xl border border-gray-800/60">
-                    <CheckCircle2 size={16} className="text-emerald-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-bold">La Dirigenta del Agua y la Olla:</strong>
-                      Rosa en Vara Gruesa o Margarita en Rari. Monitorean la turbiedad de las copas de APR, cuidan la semilla nativa y defienden el oficio tradicional frente a la copia industrial.
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          )}
-
-          {/* TAB 2: RADIOTEATRO Y FICCION POPULAR */}
-          {activeTab === 'radioteatro' && (
-            <div className="space-y-6 animate-fadeIn">
-              
-              <div className="p-5 rounded-2xl bg-gradient-to-r from-amber-950/50 via-purple-950/20 to-transparent border border-amber-500/30">
-                <span className="text-[10px] font-black uppercase text-amber-300 tracking-wider flex items-center gap-1.5 mb-1.5">
-                  <Drama size={16} /> El Poder Olvidado de la Ficción Sonora
-                </span>
-                <h3 className="text-lg font-black font-serif text-white">
-                  "El Radioteatro: La puerta mágica para que los jóvenes y las familias vuelvan a sentarse alrededor del parlante"
-                </h3>
-                <p className="text-xs text-gray-300 mt-2">
-                  La ficción radial campesina fue el pegamento cultural del campo chileno durante décadas. Hoy, con micrófonos caseros, librerías de foley comunitario (hojas secas, espuelas, agua de acequia) y guiones nacidos en asambleas, el radioteatro es la herramienta de atracción comunitaria más poderosa que tenemos.
-                </p>
-              </div>
-
-              {/* Ideas de Formatos de Radioteatro */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2.5 hover:border-amber-500/40 transition-colors">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-500/30">
-                      Serie de Misterio & Leyenda Viva
-                    </span>
-                    <span className="text-xs text-gray-500 font-bold">Episodios de 7 min</span>
-                  </div>
-                  <h4 className="font-bold text-base text-white">
-                    "El Cuero del Achibueno y los Guardadores de la Niebla"
-                  </h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">
-                    Ficción de suspenso ecológico: relatos orales de arrieros sobre criaturas míticas que defienden las nacientes cordilleranas contra retroexcavadoras furtivas. Grabado con voces de liceanos rurales de Colbún y efectos de sonido en vivo.
-                  </p>
-                  <div className="text-[11px] text-amber-200/80 bg-black/30 p-2 rounded-lg font-mono">
-                    💡 Impacto: Escuchado en escuelas rurales, juntas de vecinos y subido a Spotify como podcast patrimonial.
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2.5 hover:border-amber-500/40 transition-colors">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                      Sátira Social & Bolsillo
-                    </span>
-                    <span className="text-xs text-gray-500 font-bold">Micros de 3 min</span>
-                  </div>
-                  <h4 className="font-bold text-base text-white">
-                    "Las Desventuras de Don Teófilo y la Boleta de la Luz"
-                  </h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">
-                    Comedia pícara campesina donde un abuelo y su nieta enfrentan las cartas de cobro abusivo, las líneas sulfatadas y descubren cómo organizarse en el comité comunal para exigir compensaciones legales de la SEC.
-                  </p>
-                  <div className="text-[11px] text-emerald-200/80 bg-black/30 p-2 rounded-lg font-mono">
-                    💡 Impacto: Educar en derechos del consumidor rural a través de la carcajada y la empatía cotidiana.
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2.5 hover:border-amber-500/40 transition-colors">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase bg-purple-500/20 text-purple-300 px-2.5 py-0.5 rounded-full border border-purple-500/30">
-                      Memoria Histórica Campesina
-                    </span>
-                    <span className="text-xs text-gray-500 font-bold">Temporadas Temáticas</span>
-                  </div>
-                  <h4 className="font-bold text-base text-white">
-                    "Tierra Brava: Cuando el Valle Despertó"
-                  </h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">
-                    Dramatización histórica de la Reforma Agraria en el Maule Sur (Linares, Parral y Longaví), narrada desde las cocinas campesinas: la entrega de títulos, los sindicatos de inquilinos y la dignidad recobrada.
-                  </p>
-                  <div className="text-[11px] text-purple-200/80 bg-black/30 p-2 rounded-lg font-mono">
-                    💡 Impacto: Diálogo intergeneracional entre los abuelos que vivieron la faena y los jóvenes de hoy.
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2.5 hover:border-amber-500/40 transition-colors">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase bg-sky-500/20 text-sky-300 px-2.5 py-0.5 rounded-full border border-sky-500/30">
-                      Concurso Escolar de Microficción
-                    </span>
-                    <span className="text-xs text-gray-500 font-bold">Convocatoria Abierta</span>
-                  </div>
-                  <h4 className="font-bold text-base text-white">
-                    "Maule en 100 Segundos: Tu historia en la radio"
-                  </h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">
-                    Los niños y jóvenes de postas y escuelas envían audios de WhatsApp relatando historias de sus abuelos o de sus mascotas del campo. La radio agrega música, foley y los premia emitiéndolos en horario estelar.
-                  </p>
-                  <div className="text-[11px] text-sky-200/80 bg-black/30 p-2 rounded-lg font-mono">
-                    💡 Impacto: Vinculación territorial directa con las familias y fomento a la lectoescritura oral.
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          )}
-
-          {/* TAB 3: IA CRITICA PERO A FAVOR */}
-          {activeTab === 'ia_critica' && (
-            <div className="space-y-6 animate-fadeIn">
-              
-              <div className="p-5 rounded-2xl bg-gradient-to-r from-sky-950/50 via-cyan-950/20 to-transparent border border-sky-500/30">
-                <span className="text-[10px] font-black uppercase text-sky-300 tracking-wider flex items-center gap-1.5 mb-1.5">
-                  <Bot size={16} /> Nuestra Postura Tecnológica
-                </span>
-                <h3 className="text-lg font-black font-serif text-white">
-                  "Uso Crítico de la Inteligencia Artificial: La máquina es secretaria de la comunidad, nunca el corazón ni el criterio."
-                </h3>
-                <p className="text-xs text-gray-300 mt-2">
-                  Ni luditas que le temen a la máquina, ni tecnócratas ciegos que entregan la verdad a Silicon Valley. En las radios comunitarias del Maule Sur entendemos la IA como una <strong>palanca de multiplicación popular</strong>: permite a una radio campesina de tres personas competir en velocidad y rigor con los grandes consorcios mediáticos de Santiago, siempre bajo soberanía territorial.
-                </p>
-              </div>
-
-              {/* Matriz Dialéctica: Peligros vs Potencias */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                
-                {/* Lo que RECHAZAMOS (Postura Crítica) */}
-                <div className="p-5 rounded-2xl bg-red-950/25 border border-red-900/40 space-y-3">
-                  <h4 className="font-black text-sm text-red-300 uppercase tracking-wider flex items-center gap-2">
-                    <ShieldAlert size={16} className="text-red-400" /> Los Peligros que Combatimos
-                  </h4>
-                  <ul className="space-y-2.5 text-xs text-gray-300">
-                    <li className="flex items-start gap-2">
-                      <span className="text-red-400 font-bold">✕</span>
-                      <span><strong>Homogeneización cultural:</strong> Modelos entrenados en California que no distinguen un poroto tórtola de un poroto mantenedor, ni entienden qué significa un <em>Puelche</em> en la precordillera.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-red-400 font-bold">✕</span>
-                      <span><strong>Alucinaciones peligrosas:</strong> Inventar teléfonos de emergencia, dosis de fertilizante o resoluciones de subsidio que dañen a las familias.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-red-400 font-bold">✕</span>
-                      <span><strong>Periodismo vago y desalmado:</strong> Llenar la web con artículos robóticos genéricos para ganar clicks vacíos en Google, destruyendo la confianza popular.</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Lo que ABRAZAMOS (Potencia Popular) */}
-                <div className="p-5 rounded-2xl bg-emerald-950/25 border border-emerald-900/40 space-y-3">
-                  <h4 className="font-black text-sm text-emerald-300 uppercase tracking-wider flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-emerald-400" /> El Uso a Favor del Pueblo
-                  </h4>
-                  <ul className="space-y-2.5 text-xs text-gray-300">
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span><strong>Traductora de jerga burocrática:</strong> Tomar el Diario Oficial o un informe de la DOH de 80 páginas y transformarlo en 3 preguntas humanas: <em>¿Qué pasó?</em>, <em>¿Por qué?</em> y <em>¿Qué hacemos?</em></span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span><strong>Asistente de transcripción y síntesis rápida:</strong> Convertir audios de WhatsApp enviados por vecinos desde el tractor en borradores estructurados listos para ser revisados por el editor humano.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span>
-                      <span><strong>Guionaje sonoro y foley adaptativo:</strong> Ayudar a diseñar estructuras dramáticas para radioteatros comunitarios y escalar las cápsulas a redes sociales en segundos.</span>
-                    </li>
-                  </ul>
-                </div>
-
-              </div>
-
-              {/* El Regla de Oro */}
-              <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 flex items-center gap-3">
-                <AlertCircle size={24} className="text-amber-400 flex-shrink-0" />
-                <div>
-                  <strong className="text-white block font-bold mb-0.5">La Regla de Oro Comunitaria:</strong>
-                  <em>"Ningún texto ni cápsula sale al aire sin el ojo, la firma y la responsabilidad de un ser humano con los pies en la tierra del Maule."</em>
-                </div>
-              </div>
-
-            </div>
-          )}
-
-          {/* TAB 4: LABORATORIO DE IMANES COMUNITARIOS */}
-          {activeTab === 'laboratorio' && (
-            <div className="space-y-6 animate-fadeIn">
-              
-              <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-teal-950/20 to-transparent border border-emerald-500/30">
-                <span className="text-[10px] font-black uppercase text-emerald-300 tracking-wider flex items-center gap-1.5 mb-1.5">
-                  <Zap size={16} /> Imanes de Audiencia y Participación
-                </span>
-                <h3 className="text-lg font-black font-serif text-white">
-                  "Otras posibilidades concretas para enganchar y multiplicar a la comunidad"
-                </h3>
-                <p className="text-xs text-gray-300 mt-2">
-                  La comunicación comunitaria es un ecosistema de servicios mutuos. Si la radio le soluciona la vida diaria a la gente, la gente protege y financia a la radio.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2">
-                  <div className="text-amber-400 font-black text-sm flex items-center gap-1.5">
-                    <Share2 size={16} /> Trueque Radial & Mercado Libre Campesino
-                  </div>
-                  <p className="text-xs text-gray-400">
-                    Microprograma diario donde no corre plata: sacos de guano por ganchos de higuera, una carretilla usada por un lechón. En la web y al aire simultáneamente.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2">
-                  <div className="text-emerald-400 font-black text-sm flex items-center gap-1.5">
-                    <Tv size={16} /> El Semáforo de Precios en Vivo
-                  </div>
-                  <p className="text-xs text-gray-400">
-                    Despacho directo todos los miércoles y sábados desde las ferias de Linares y Parral a las 07:30 AM: precios de mayoreo para que los intermediarios no engañen al parcelero.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2">
-                  <div className="text-sky-400 font-black text-sm flex items-center gap-1.5">
-                    <Mic size={16} /> Asambleas Radiales Abiertas
-                  </div>
-                  <p className="text-xs text-gray-400">
-                    Transmisión en directo de cabildos de agua y juntas vecinales. Si un dirigente no puede viajar por falta de locomoción, su voz se transmite por la red provincial.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2">
-                  <div className="text-purple-400 font-black text-sm flex items-center gap-1.5">
-                    <Award size={16} /> Saludos de Cumpleaños & Memorias
-                  </div>
-                  <p className="text-xs text-gray-400">
-                    El alma tradicional de la radio AM/FM llevada a WhatsApp: los audios con saludos a la tía que vive en el callejón se emiten con música tradicional de fondo.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2">
-                  <div className="text-rose-400 font-black text-sm flex items-center gap-1.5">
-                    <HeartHandshake size={16} /> Cadena de Farmacia & Traslados
-                  </div>
-                  <p className="text-xs text-gray-400">
-                    Bolsa de solidaridad para remedios escasos en postas y aviso de vecinos que bajan en camioneta vacía al hospital y tienen asientos libres.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-[#181d24] border border-gray-800 space-y-2">
-                  <div className="text-yellow-400 font-black text-sm flex items-center gap-1.5">
-                    <Lightbulb size={16} /> Spotify Podcast & Archivo Histórico
-                  </div>
-                  <p className="text-xs text-gray-400">
-                    Curaduría de las mejores historias de vida campesina en Spotify y plataformas de podcast para que los maulinos migrantes en Santiago y el mundo no olviden su raíz.
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-          )}
-
-        </div>
-
-        {/* Pie de Acción */}
-        <div className="bg-[#14171d] p-4 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-          <div className="text-gray-400 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-ping"></span>
-            <span>Documento Estratégico de Mesa Editorial • Maule Red</span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => {
-                const text = `Maule Red - Manifiesto y Pitch de Radios Comunitarias: Comunicación Popular, Ficción Sonora y Uso Crítico de IA en el Maule Sur.`;
-                navigator.clipboard?.writeText(text);
-                alert('¡Resumen del pitch copiado al portapapeles!');
-              }}
-              className="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 font-bold transition-colors cursor-pointer"
-            >
-              Copiar Resumen
-            </button>
+            {/* Botón Cerrar */}
             <button
               onClick={onClose}
-              className="px-5 py-2 rounded-xl bg-[#b84227] hover:bg-[#a0361e] text-white font-bold transition-all shadow-md cursor-pointer"
+              className="w-8 h-8 rounded-xl bg-gray-800/80 hover:bg-gray-700 text-gray-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer border border-gray-700/60"
+              aria-label="Cerrar modal"
             >
-              Entendido / Cerrar
+              ✕
             </button>
           </div>
+        </div>
+
+        {/* Barra de progreso / Píldoras de Diapositivas */}
+        <div className="bg-[#0b1216]/95 border-b border-emerald-950/60 px-5 py-2.5 flex items-center gap-1.5 overflow-x-auto">
+          {PITCH_SLIDES.map((s, idx) => {
+            const isActive = idx === currentSlideIndex;
+            return (
+              <button
+                key={s.id}
+                onClick={() => setCurrentSlideIndex(idx)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
+                  isActive
+                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/40 ring-1 ring-emerald-400'
+                    : 'bg-gray-900/60 text-gray-400 hover:text-gray-200 hover:bg-gray-800/80 border border-gray-800/50'
+                }`}
+              >
+                <span>{s.categoryIcon}</span>
+                <span className="text-[11px]">{idx + 1}. {s.category}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Cuerpo del Slide */}
+        <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6">
+          
+          {/* Encabezado del Slide Actual */}
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-emerald-400 text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
+                {slide.categoryIcon}
+                <span>{slide.category}</span>
+              </span>
+            </div>
+
+            <h1 className="text-2xl sm:text-3xl font-black font-serif text-white tracking-tight leading-snug">
+              {slide.title}
+            </h1>
+
+            <p className="text-sm sm:text-base text-emerald-100/80 mt-1 max-w-3xl leading-relaxed">
+              {slide.subtitle}
+            </p>
+          </div>
+
+          {/* Grilla Visual: Imagen Destacada + Puntos Conceptuales */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            {/* Columna Izquierda: Imagen y Takeaway (5 cols) */}
+            <div className="lg:col-span-5 space-y-3.5">
+              <div className="relative rounded-2xl overflow-hidden border border-emerald-500/30 shadow-xl group">
+                <img
+                  src={slide.image}
+                  alt={slide.imageAlt}
+                  className="w-full h-56 sm:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-3.5">
+                  <span className="text-[11px] text-gray-200 font-medium">
+                    {slide.imageCaption}
+                  </span>
+                </div>
+              </div>
+
+              {/* Tesis / Takeaway Destacado */}
+              <div className="bg-emerald-950/40 border border-emerald-800/40 p-4 rounded-2xl text-xs sm:text-sm text-emerald-200 leading-relaxed shadow-sm">
+                <div className="flex items-center gap-2 font-bold text-emerald-300 text-xs mb-1">
+                  <Lightbulb size={15} />
+                  <span>Idea Fuerza</span>
+                </div>
+                {slide.keyTakeaway}
+              </div>
+
+              {/* Cita si existe */}
+              {slide.quote && (
+                <div className="bg-gray-900/60 border border-gray-800 p-4 rounded-2xl text-xs text-gray-300 italic">
+                  <p>«{slide.quote.text}»</p>
+                  <p className="text-right text-[10px] text-emerald-400 font-bold not-italic mt-2">
+                    — {slide.quote.author}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Columna Derecha: Tarjetas Conceptuales Claras y Digestibles (7 cols) */}
+            <div className="lg:col-span-7 space-y-3.5">
+              {slide.points.map((pt, i) => (
+                <div
+                  key={i}
+                  className="bg-[#141b22]/90 hover:bg-[#18232c] border border-emerald-900/40 hover:border-emerald-600/50 p-4 sm:p-5 rounded-2xl transition-all shadow-sm group"
+                >
+                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                    <h3 className="font-bold text-sm sm:text-base text-white group-hover:text-emerald-300 transition-colors flex items-center gap-2">
+                      <span className="w-6 h-6 rounded-lg bg-emerald-950 text-emerald-400 text-xs font-mono font-bold flex items-center justify-center border border-emerald-800/60">
+                        {i + 1}
+                      </span>
+                      <span>{pt.title}</span>
+                    </h3>
+                    {pt.badge && (
+                      <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 flex-shrink-0">
+                        {pt.badge}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed pl-8">
+                    {pt.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Barra Inferior de Navegación de Diapositivas */}
+        <div className="bg-[#0b1216]/95 border-t border-emerald-950/80 px-6 py-4 flex items-center justify-between gap-4">
+          
+          <button
+            onClick={() => setCurrentSlideIndex((prev) => Math.max(0, prev - 1))}
+            disabled={currentSlideIndex === 0}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              currentSlideIndex === 0
+                ? 'opacity-40 cursor-not-allowed text-gray-500 bg-gray-900'
+                : 'bg-gray-800 hover:bg-gray-700 text-gray-200 hover:text-white border border-gray-700'
+            }`}
+          >
+            <ChevronLeft size={16} />
+            <span>Anterior</span>
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="hidden sm:flex items-center gap-1.5">
+            {PITCH_SLIDES.map((_, dotIdx) => (
+              <button
+                key={dotIdx}
+                onClick={() => setCurrentSlideIndex(dotIdx)}
+                className={`transition-all rounded-full cursor-pointer ${
+                  dotIdx === currentSlideIndex
+                    ? 'w-6 h-2 bg-emerald-400'
+                    : 'w-2 h-2 bg-gray-700 hover:bg-gray-500'
+                }`}
+                aria-label={`Ir al slide ${dotIdx + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={() => setCurrentSlideIndex((prev) => Math.min(PITCH_SLIDES.length - 1, prev + 1))}
+            disabled={currentSlideIndex === PITCH_SLIDES.length - 1}
+            className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              currentSlideIndex === PITCH_SLIDES.length - 1
+                ? 'opacity-40 cursor-not-allowed text-gray-500 bg-gray-900'
+                : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-950/60 ring-1 ring-emerald-400'
+            }`}
+          >
+            <span>Siguiente</span>
+            <ChevronRight size={16} />
+          </button>
+
         </div>
 
       </div>

@@ -13,7 +13,7 @@ export const GatekeeperLogin: React.FC<GatekeeperLoginProps> = ({ onSuccess, onC
   
   const [pinOrKey, setPinOrKey] = useState('');
   const [selectedRole, setSelectedRole] = useState<UserRole>('editor');
-  const [userName, setUserName] = useState('Mariana Gómez');
+  const [userName, setUserName] = useState('Equipo Editorial');
   const [errorMsg, setErrorMsg] = useState('');
   const [showKey, setShowKey] = useState(false);
 
@@ -46,14 +46,14 @@ export const GatekeeperLogin: React.FC<GatekeeperLoginProps> = ({ onSuccess, onC
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0d1013]/90 backdrop-blur-md animate-fadeIn">
-      <div className="bg-[#181c22] rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-gray-800 text-gray-200 relative">
+      <div className="bg-[#181c22] rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-emerald-900/40 text-gray-200 relative">
         
         {/* Encabezado Gatekeeper */}
         <div className="text-center space-y-2 mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#b84227] to-[#e4a834] flex items-center justify-center mx-auto shadow-lg text-white">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-800 flex items-center justify-center mx-auto shadow-lg text-white">
             <Lock size={28} />
           </div>
-          <span className="text-[10px] font-black tracking-widest text-[#e4a834] uppercase block">
+          <span className="text-[10px] font-black tracking-widest text-emerald-400 uppercase block">
             Acceso Seguro • Gatekeeper
           </span>
           <h2 className="text-xl sm:text-2xl font-black font-serif text-white">
@@ -75,10 +75,10 @@ export const GatekeeperLogin: React.FC<GatekeeperLoginProps> = ({ onSuccess, onC
             <div className="grid grid-cols-3 gap-2 text-xs">
               <button
                 type="button"
-                onClick={() => handleQuickPreset('admin', 'Directorio Popular')}
+                onClick={() => handleQuickPreset('admin', 'Directorio Comunitario')}
                 className={`py-2 px-2 rounded-xl font-bold border transition-all text-center ${
                   selectedRole === 'admin'
-                    ? 'bg-[#b84227] text-white border-[#b84227] shadow'
+                    ? 'bg-emerald-600 text-white border-emerald-500 shadow'
                     : 'bg-[#222831] text-gray-400 border-gray-700 hover:text-white'
                 }`}
               >
@@ -86,10 +86,10 @@ export const GatekeeperLogin: React.FC<GatekeeperLoginProps> = ({ onSuccess, onC
               </button>
               <button
                 type="button"
-                onClick={() => handleQuickPreset('editor', 'Mariana Gómez')}
+                onClick={() => handleQuickPreset('editor', 'Equipo Editorial')}
                 className={`py-2 px-2 rounded-xl font-bold border transition-all text-center ${
                   selectedRole === 'editor'
-                    ? 'bg-[#b84227] text-white border-[#b84227] shadow'
+                    ? 'bg-emerald-600 text-white border-emerald-500 shadow'
                     : 'bg-[#222831] text-gray-400 border-gray-700 hover:text-white'
                 }`}
               >
@@ -97,10 +97,10 @@ export const GatekeeperLogin: React.FC<GatekeeperLoginProps> = ({ onSuccess, onC
               </button>
               <button
                 type="button"
-                onClick={() => handleQuickPreset('corresponsal', 'Don Juan Sepúlveda')}
+                onClick={() => handleQuickPreset('corresponsal', 'Corresponsal de Cuenca')}
                 className={`py-2 px-2 rounded-xl font-bold border transition-all text-center ${
                   selectedRole === 'corresponsal'
-                    ? 'bg-[#b84227] text-white border-[#b84227] shadow'
+                    ? 'bg-emerald-600 text-white border-emerald-500 shadow'
                     : 'bg-[#222831] text-gray-400 border-gray-700 hover:text-white'
                 }`}
               >
@@ -118,7 +118,7 @@ export const GatekeeperLogin: React.FC<GatekeeperLoginProps> = ({ onSuccess, onC
               required
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              className="w-full text-xs bg-[#222831] border border-gray-700 rounded-xl p-2.5 text-white focus:ring-2 focus:ring-[#b84227] focus:outline-none"
+              className="w-full text-xs bg-[#222831] border border-gray-700 rounded-xl p-2.5 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"
             />
           </div>
 
@@ -136,7 +136,7 @@ export const GatekeeperLogin: React.FC<GatekeeperLoginProps> = ({ onSuccess, onC
                   setPinOrKey(e.target.value);
                   setErrorMsg('');
                 }}
-                className="w-full text-xs bg-[#222831] border border-gray-700 rounded-xl p-2.5 pr-10 text-white focus:ring-2 focus:ring-[#b84227] focus:outline-none tracking-wider"
+                className="w-full text-xs bg-[#222831] border border-gray-700 rounded-xl p-2.5 pr-10 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none tracking-wider"
               />
               <button
                 type="button"
@@ -166,7 +166,7 @@ export const GatekeeperLogin: React.FC<GatekeeperLoginProps> = ({ onSuccess, onC
             </button>
             <button
               type="submit"
-              className="w-1/2 py-2.5 rounded-xl text-xs font-bold text-white bg-[#b84227] hover:bg-[#a0361e] shadow-lg flex items-center justify-center gap-1.5 transition-all active:scale-95"
+              className="w-1/2 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-lg flex items-center justify-center gap-1.5 transition-all active:scale-95"
             >
               <span>Ingresar</span>
               <ArrowRight size={14} />
