@@ -14,8 +14,10 @@ import {
   MapPin, 
   Layers, 
   CheckCircle2, 
-  Clock 
+  Clock,
+  Sparkles
 } from 'lucide-react';
+import { ComunitariasPitchModal } from './ComunitariasPitchModal';
 
 interface ContentManagerProps {
   onNewArticle: () => void;
@@ -29,6 +31,7 @@ export const ContentManager: React.FC<ContentManagerProps> = ({
   const { articles, updateArticle, deleteArticle } = useAppData();
 
   const [search, setSearch] = useState('');
+  const [showPitchModal, setShowPitchModal] = useState(false);
   const [filterStatus, setFilterStatus] = useState<'todos' | 'publicado' | 'borrador'>('todos');
   const [filterSection, setFilterSection] = useState<string>('todas');
   const [filterComuna, setFilterComuna] = useState<string>('todas');
@@ -71,13 +74,24 @@ export const ContentManager: React.FC<ContentManagerProps> = ({
           </p>
         </div>
 
-        <button
-          onClick={onNewArticle}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#b84227] hover:bg-[#a0361e] text-white font-bold text-xs shadow-lg transition-all active:scale-95 self-start sm:self-auto"
-        >
-          <Plus size={16} />
-          <span>Nueva Noticia / Crónica</span>
-        </button>
+        <div className="flex items-center gap-2.5 flex-wrap self-start sm:self-auto">
+          <button
+            onClick={() => setShowPitchModal(true)}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-[#b84227] hover:from-amber-500 hover:to-[#c4492d] text-white font-black text-xs shadow-md transition-all active:scale-95 border border-amber-400/40 cursor-pointer"
+            title="Abrir el Pitch de Radios Comunitarias, Radioteatro e IA Lúcida"
+          >
+            <Sparkles size={15} className="text-amber-200 animate-pulse" />
+            <span>Pitch Comunitarias & Radioteatro</span>
+          </button>
+
+          <button
+            onClick={onNewArticle}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#b84227] hover:bg-[#a0361e] text-white font-bold text-xs shadow-lg transition-all active:scale-95 cursor-pointer"
+          >
+            <Plus size={16} />
+            <span>Nueva Noticia / Crónica</span>
+          </button>
+        </div>
       </div>
 
       {/* Barra de Filtros Multifactor */}
@@ -257,6 +271,12 @@ export const ContentManager: React.FC<ContentManagerProps> = ({
           ))}
         </div>
       )}
+
+      {/* Modal de Manifiesto & Pitch de Radios Comunitarias */}
+      <ComunitariasPitchModal
+        isOpen={showPitchModal}
+        onClose={() => setShowPitchModal(false)}
+      />
 
     </div>
   );

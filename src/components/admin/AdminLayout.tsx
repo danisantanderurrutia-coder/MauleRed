@@ -19,8 +19,10 @@ import {
   Flame, 
   Droplet,
   Radio,
-  AlertTriangle
+  AlertTriangle,
+  Sparkles
 } from 'lucide-react';
+import { ComunitariasPitchModal } from './ComunitariasPitchModal';
 
 interface AdminLayoutProps {
   onBackToFrontoffice: () => void;
@@ -40,6 +42,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
   const [activeTab, setActiveTab] = useState<'contenidos' | 'multimedia' | 'moderacion' | 'navegacion' | 'respaldo'>('contenidos');
   const [editingArticle, setEditingArticle] = useState<Article | null>(null);
   const [isCreatingNew, setIsCreatingNew] = useState(false);
+  const [showPitchModal, setShowPitchModal] = useState(false);
 
   const pendingModerationCount = moderationItems.filter(m => m.status === 'pendiente').length;
 
@@ -117,6 +120,15 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
                 </div>
               </div>
             )}
+
+            <button
+              onClick={() => setShowPitchModal(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-600 to-[#b84227] hover:from-amber-500 hover:to-[#c7462b] text-white text-xs font-black transition-all border border-amber-400/40 shadow-sm cursor-pointer"
+              title="Abrir Manifiesto & Pitch de Radios Comunitarias"
+            >
+              <Sparkles size={13} className="text-amber-200" />
+              <span>Pitch Comunitarias</span>
+            </button>
 
             <button
               onClick={onBackToFrontoffice}
@@ -262,6 +274,12 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
       <footer className="bg-[#12151a] border-t border-gray-800/80 py-4 px-6 text-center text-xs text-gray-500">
         Panel de Redacción Popular • Red de Noticias del Maule Sur • Todos los cambios son persistentes
       </footer>
+
+      {/* Modal de Manifiesto & Pitch de Radios Comunitarias */}
+      <ComunitariasPitchModal
+        isOpen={showPitchModal}
+        onClose={() => setShowPitchModal(false)}
+      />
 
     </div>
   );
