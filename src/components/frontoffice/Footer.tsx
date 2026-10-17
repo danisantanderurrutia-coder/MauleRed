@@ -121,7 +121,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin, onNavigateSection }
                 className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-gray-800 text-gray-200 hover:bg-theme-primary hover:text-white transition-colors border border-gray-700 text-xs font-bold"
               >
                 <Lock size={13} />
-                <span>Acceso Santuario / Redacción</span>
+                <span>Panel de Administrador</span>
               </button>
             </div>
           </div>

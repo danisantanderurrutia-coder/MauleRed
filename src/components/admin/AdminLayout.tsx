@@ -20,7 +20,8 @@ import {
   Droplet,
   Radio,
   AlertTriangle,
-  Sparkles
+  Sparkles,
+  Lock
 } from 'lucide-react';
 import { ComunitariasPitchModal } from './ComunitariasPitchModal';
 
@@ -69,22 +70,22 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onBackToFrontoffice })
       <header className="bg-[#14171d] border-b border-gray-800 sticky top-0 z-40 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           
-          {/* Identidad del Santuario */}
+          {/* Identidad del Panel de Administrador */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#b84227] flex items-center justify-center text-white shadow-md">
-              <Flame size={20} className="text-[#e4a834]" />
+            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md">
+              <Lock size={18} className="text-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-white font-extrabold text-sm sm:text-base font-serif">
-                  Santuario de Redacción
+                  Panel de Administrador
                 </span>
-                <span className="bg-[#b84227]/30 text-[#e86a38] text-[10px] font-black uppercase px-2 py-0.5 rounded border border-[#b84227]/40">
+                <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-black uppercase px-2 py-0.5 rounded border border-emerald-500/30">
                   Maule Sur
                 </span>
               </div>
               <p className="text-[11px] text-gray-400">
-                Panel de Administración • Gatekeeper Activo
+                Gestión Territorial • Moderación Comunitaria
               </p>
             </div>
           </div>

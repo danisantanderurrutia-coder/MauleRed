@@ -109,7 +109,7 @@ const MainContent: React.FC = () => {
     }
   };
 
-  // Si estamos en la vista del Administrador Santuario
+  // Si estamos en la vista del Panel de Administrador
   if (viewMode === 'admin') {
     return <AdminLayout onBackToFrontoffice={() => setViewMode('frontoffice')} />;
   }

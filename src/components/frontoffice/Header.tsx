@@ -119,15 +119,15 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="hidden sm:inline">{isDataSaverActive ? '3G Ahorro Activo' : 'Modo 3G'}</span>
             </button>
 
-            {/* Acceso a Sala de Redacción / Santuario */}
+            {/* Acceso al Panel de Administrador */}
             <button
               type="button"
               onClick={onOpenAdmin}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/15 text-white hover:bg-white/25 transition-colors border border-white/30 text-xs font-bold shadow-xs cursor-pointer"
-              title="Panel de redacción y moderación comunitaria"
+              className="p-1.5 rounded-lg bg-white/15 text-white hover:bg-white/25 transition-colors border border-white/30 text-xs font-bold shadow-xs cursor-pointer flex items-center justify-center"
+              title="Panel de Administrador"
+              aria-label="Panel de Administrador"
             >
-              <Lock size={12} />
-              <span>{currentUser ? `Santuario (${currentUser.name})` : 'Redacción'}</span>
+              <Lock size={13} />
             </button>
           </div>
 

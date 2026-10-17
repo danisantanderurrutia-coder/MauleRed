@@ -299,7 +299,13 @@ export const AppDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => {
     try {
       const saved = sessionStorage.getItem(AUTH_STORAGE_KEY) || localStorage.getItem(AUTH_STORAGE_KEY);
-      return saved ? JSON.parse(saved) : null;
+      if (!saved) return null;
+      const parsed = JSON.parse(saved);
+      if (parsed && typeof parsed.name === 'string' && (parsed.name.includes('Mariana') || parsed.name.includes('Sepúlveda'))) {
+        parsed.name = 'Equipo Editorial';
+        parsed.username = 'equipo.editorial';
+      }
+      return parsed;
     } catch {
       return null;
     }

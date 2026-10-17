@@ -57,7 +57,7 @@ export const GatekeeperLogin: React.FC<GatekeeperLoginProps> = ({ onSuccess, onC
             Acceso Seguro • Gatekeeper
           </span>
           <h2 className="text-xl sm:text-2xl font-black font-serif text-white">
-            Santuario de Redacción
+            Panel de Administrador
           </h2>
           <p className="text-xs text-gray-400">
             Panel de control, moderación territorial y gestión de audio de la Red Maule Sur.
