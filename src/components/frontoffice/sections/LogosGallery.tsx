@@ -226,10 +226,10 @@ export const NEW_LOGOS_COLLECTION: LogoDetail[] = [
     category: 'territorio_belleza',
     categoryLabel: 'Belleza Natural & Especies del Maule',
     num: 20,
-    title: 'Pájaro Chucao en Rama de Roble (Emblema Oficial)',
-    elements: 'El emblemático pájaro Chucao con su pecho cobrizo y cola erguida sobre una rama de roble andino con brotes.',
-    symbolism: 'El vigía y mensajero del bosque nativo del Maule Sur; símbolo de buen augurio, cercanía y vida silvestre.',
-    imageSrc: '/images/logo_chucao_20.jpg'
+    title: 'Pájaro Chucao & Andes Estrellados (Emblema Oficial)',
+    elements: 'El emblemático pájaro Chucao con su pecho cobrizo sobre una rama de roble andino, altas cumbres nevadas y cielo nocturno estrellado con la Cruz del Sur.',
+    symbolism: 'El vigía y mensajero del bosque nativo del Maule Sur bajo el firmamento estrellado; símbolo de buen augurio, cercanía y memoria territorial.',
+    imageSrc: './images/logo_chucao_andes.png'
   }
 ];
 
